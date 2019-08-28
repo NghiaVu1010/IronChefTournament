@@ -38,7 +38,7 @@ body {
 
 .parallax { 
     /* Full height */
-    height: 400px; 
+    height: 100vh; 
   
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -47,18 +47,45 @@ body {
     background-size: cover;
 }
 
-.college1 {
-    background-image: url("/images/college1.jpg");
+.paraImg1 {
+    background-image: url("../images/IronChef.jpg");
 }
 
-.college2 {
-    background-image: url("/images/college2.jpg");
-}
-
-.college3 {
-    background-image: url("/images/college3.jpeg");
-}
-
-.featurette {
+/* .featurette {
     height: 400px; 
+} */
+
+@media only screen and (max-width: 800px) {
+    .parallax {
+      background-attachment: scroll;
+    }
+}
+
+/* WIP for sticky */
+#menu_bar.stick {
+	position: fixed !important;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 1001;
+	padding: .5rem 5rem;
+	min-height: 6rem;
+	height: auto;
+	border-bottom: solid 5px #246;
+}
+#menu_bar.stick div#logo, #menu_bar.stuck div#logo {
+	width: 190px;
+	min-width: 0;
+}
+
+div#menu_bar.stick:after, div#menu_bar.stuck:after {
+	opacity: 1;
+}
+
+#menu_bar.stick ul#h_navigation, #menu_bar.stuck ul#h_navigation {
+	margin-top: 10px;
+}
+
+.stick ul#h_navigation a, .stuck ul#h_navigation a {
+	font-size: 1.8rem;
 }
