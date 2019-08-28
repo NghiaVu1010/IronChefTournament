@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    
+    <link rel="stylesheet" type="text/css" href="styles/site.css" />
+    <link rel="stylesheet" type="text/css" href="styles/teams.css" />
+    <link rel="shortcut icon" type="image/png" href="images/favicon.jpg"/>
+    <title>Iron Chef Tournament</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+      <a class="navbar-brand obli" href="index.html">Iron Chef</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop" aria-controls="navbarTop" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        
+      <!-- Nav bar links -->
+      <div class="collapse navbar-collapse" id="navbarTop">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link bold" href="index.html">Home</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="m-5">
+      <!-- Custom Header for RIT -->
+      <header class="container text-center white obli space-top">
+        <h1 class="shadows">Iron Chef</h1>
+        <h2 class="shadows">Tournament</h2>
+
+        <!-- Statistics of RIT -->
+        <!-- <div class="row">
+          <div class="col-md-4">
+            <p class="data-point">83<sup>%</sup></p>
+            <div class="data-text">Faculty with PhD</div>
+          </div>
+          <div class="col-md-4">
+            <p class="data-point">15:1</p>
+            <div class="data-text">Student / Faculty Ratio</div>
+          </div>
+          <div class="col-md-4">
+            <p class="data-point">23</p>
+            <div class="data-text">Average Class Size</div>
+          </div>
+        </div> -->
+      </header>
+
+      <!-- Drop down selection of categories -->
+      <form action="#" method="GET">  
+        <fieldset>
+          <legend class="mt-3 display-4 white obli">Search Divisons:</legend>
+           <div class="container">
+             <div class="row">
+              <div class="col-md-5">
+                <label for="divisionDDL" class="white">Category: </label>
+                <select class="custom-select" id="divisionDDL" required>
+                  <option selected value="">Choose...</option>
+                </select>
+                <p id="divisionDetails"></p>
+              </div>
+            
+              <!-- Add/Reset button-->
+              <div class="col-md-6">
+                <button type="button" class="btn btn-success" id="addCourseBtn">Add Team</button>
+                <button type="button" class="btn btn-primary" id="viewAllBtn">View All Teams</button>
+                <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+
+      <table class="table m-3" id="teamTable">
+        <thead class="thead-light" id="teamHead">
+          <tr>
+            <th class="white">Team ID</th>
+            <th class="white">Team Name</th>
+            <th class="white">Manager Name</th>
+            <th class="white">Current Size</th>
+            <th class="white">Team Details</th>
+          </tr>
+        </thead>
+        <tbody class="white" id="teamBody">
+        </tbody>
+      </table>
+    </main>
+
+    <footer class="container white">
+      <hr class="bg-white">
+      <p>&copy;Hartcode Academy 2019</p>
+    </footer>  
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <script src="scripts/teams.js"></script>
+  </body>
+</html>
