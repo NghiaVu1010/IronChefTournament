@@ -1,0 +1,45 @@
+.shadows {
+    font-weight: bold;
+    font-family: "arial black", helvetica, arial, sans-serif;
+    
+    text-shadow: 3px 3px 8px rgba(255,255,255,0.45);
+}
+
+.data-point {
+    font-size: 4rem;
+    font-weight: bold;
+    font-family: "arial black", helvetica, arial, sans-serif;
+    
+    text-shadow: 3px 3px 8px rgba(255,255,255,0.45);
+    background-color: #2e6b83;
+}
+
+.data-text {
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: "arial black", helvetica, arial, sans-serif;
+
+    text-shadow: 3px 3px 8px rgba(255,255,255,0.45);
+    border-top: 3px solid white;
+}
+
+.space-top {
+    padding-top: 20px;
+}
+
+.anchorDetail {
+    color: #ffffff;
+
+}
+
+.anchorDetail:hover {
+    background-color: #ffffff;
+  }
+
+#coursesDDL {
+    width: 300px;
+}
+
+#coursesTable {
+    display: none;
+}

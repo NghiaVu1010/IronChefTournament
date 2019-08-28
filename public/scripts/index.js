@@ -14,7 +14,7 @@ function stick_top_nav(){
 $(function() {
     //stick_top_nav();
 
-    $("#lookUpCourses").on("click", function() {
+    $("#viewTeamBtn").on("click", function() {
         location.href = "courses.html";
     });
 });
