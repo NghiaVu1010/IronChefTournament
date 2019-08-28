@@ -1,0 +1,25 @@
+body {
+    background-color: #3c4f57;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.obli {
+    font-style: oblique;
+}
+
+.white {
+    color: #ffffff;
+}
+
+.bg-white {
+    background-color: #ffffff;
+}
+
+.bold {
+    font-weight: bold;
+}
