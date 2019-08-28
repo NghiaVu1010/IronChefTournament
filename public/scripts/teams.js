@@ -23,20 +23,26 @@ function displayData(list) {
 * @param element (Object) - Create an row element to build table
 */
 function insertTableRow(list) {
-    let courseId = list.CourseId;
-    let courseTitle = list.Title;
-    let courseMeets = list.Meets;
+    // Create row to append interested data
+    let newRow = $("<tr>");
+    let teamIdElement = $("<td>", {text: list.TeamId});
+    let teamNameElement = $("<td>", {text: list.TeamName});
+    let managerNameElement = $("<td>", {text: list.ManagerName});
+    let membersLenElement = $("<td>", {text: list.Members.length});
+    
+    // Create data specifically for view details
+    let newTd = $("<td>");
+    let detailElement = $("<a>", {text: "View / Edit", href: "details.html?teamId=" + list.TeamId, class: "anchorDetail"});
 
-    let element = 
-    "<tr><td>" + courseId + 
-    "</td><td>" + courseTitle + 
-    "</td><td>" + courseMeets + 
-    "</td><td><a href='details.html?courseId=" + courseId + "'>View Details</a>" + 
-    "</td><td><a href='edit_details.html?courseId=" + courseId + "'>Edit Details</a>" + 
-    "</a></td></tr>";
+    $("#teamBody").append(newRow);
 
-    $("#coursesBody").append(element);
-    $("#coursesBody tr td a").addClass("anchorDetail");
+    newRow.append(teamIdElement)
+        .append(teamNameElement)
+        .append(managerNameElement)
+        .append(membersLenElement)
+        .append(newTd);
+
+    newTd.append(detailElement);
 }
 
 /*
@@ -52,49 +58,64 @@ function buildList(dropdown, list) {
 }
 
 $(function() {
-
-    //dynamically build DDL with divisions
+    // Dynamically build DDL with divisions
+    let divisionData;
     $.getJSON("/api/leagues", (data) => {
-        buildList($("#coursesDDL"), data);
+        divisionData = data;
+        buildList($("#divisionDDL"), divisionData);
+        
     });
+    
+    // Populate table based on selection
+    //let courseData;
+    $("#teamTable").hide();
 
-    //populate table based on selection
-    let courseData;
-    $("#coursesDDL").on("change", function() {
-        $("#coursesBody").empty();
+    $("#divisionDDL").on("change", () => {
+        $("#teamBody").empty();
 
-        if($("#coursesDDL").val() == "") {
-            $("#coursesTable").hide();
+        if($("#divisionDDL").val() == "") {
+            $("#teamTable").hide();
+            $("#divisionDetails").empty();
             return false;
         }
-        else $("#coursesTable").show();
+        else $("#teamTable").show();
 
-        $.getJSON("/api/courses/bycategory/" + $("#coursesDDL").val(), function(data) {
-            courseData = data;
-            displayData(courseData);
+        // Show description based on selection
+        for(let i = 0; i < divisionData.length; i++) {
+            if($("#divisionDDL").val() == divisionData[i].Code)
+                $("#divisionDetails").text(divisionData[i].Description);
+        }
+
+        console.log($("#divisionDDL").val());
+        
+        $.getJSON("/api/teams/byleague/" + $("#divisionDDL").val(), (data) => {
+            
+
+
+            displayData(data);
         });
     });
     
-    //preload all courses
+    // Preload all courses
     let allData;
-    $.getJSON("/api/courses", function(data) {
+    $.getJSON("/api/teams", function(data) {
         allData = data;
     });
 
-    $("#addCourseBtn").on("click", function() {
-        location.href = "add_course.html";
-    });
+    // $("#addCourseBtn").on("click", function() {
+    //     location.href = "add_course.html";
+    // });
 
-    //displays all courses currently offered when clicked
+    // Displays all courses currently offered when clicked
     $("#viewAllBtn").on("click", function() {
-        $("#coursesBody").empty();
-        $("#coursesTable").show();
+        $("#teamBody").empty();
+        $("#teamTable").show();
         displayData(allData);
     });
 
     // Bind Click Event Handler to Reset Buttom
     $("#resetBtn").on("click", function() {
-        $("#coursesBody").empty();
-        $("#coursesTable").hide();
+        $("#teamBody").empty();
+        $("#teamTable").hide();
     });
 });

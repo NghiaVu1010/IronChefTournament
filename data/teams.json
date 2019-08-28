@@ -94,5 +94,28 @@
 				"Phone": "817-555-5454"
 			}
 		]
+	},
+	{
+		"TeamId": 4,
+		"TeamName": "Team 4",
+		"League": "ProfessionalChef",
+		"ManagerName": "Natalie Plyers",
+		"ManagerPhone": "817-555-5454",
+		"ManagerEmail": "Natalie214@aol.com",
+		"MinAge": 21,
+		"MaxAge": 99,
+		"MaxTeamMembers": 2,
+		"TeamGender": "Male",
+		"Members": [
+			{
+				"MemberId": 7,
+				"Email": "Natalie214@aol.com",
+				"MemberName": "Elisha Plyers",
+				"ContactName": "Natalie Plyers",
+				"Age": 10,
+				"Gender": "Male",
+				"Phone": "817-555-5454"
+			}
+		]
 	}
 ]

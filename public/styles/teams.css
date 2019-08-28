@@ -29,17 +29,12 @@
 
 .anchorDetail {
     color: #ffffff;
-
 }
 
 .anchorDetail:hover {
     background-color: #ffffff;
-  }
-
-#coursesDDL {
-    width: 300px;
 }
 
-#coursesTable {
-    display: none;
+#divisionDDL {
+    width: 300px;
 }

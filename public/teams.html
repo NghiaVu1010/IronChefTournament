@@ -68,6 +68,7 @@
                 <select class="custom-select" id="divisionDDL" required>
                   <option selected value="">Choose...</option>
                 </select>
+                <p id="divisionDetails"></p>
               </div>
             
               <!-- Add/Reset button-->
@@ -81,18 +82,17 @@
         </fieldset>
       </form>
 
-      <table class="table m-3" id="coursesTable">
-        <thead class="thead-light" id="coursesHead">
+      <table class="table m-3" id="teamTable">
+        <thead class="thead-light" id="teamHead">
           <tr>
             <th class="white">Team ID</th>
             <th class="white">Team Name</th>
-            <th class="white">Namanger Name</th>
+            <th class="white">Manager Name</th>
             <th class="white">Current Size</th>
-            <th class="white">Edit</th>
+            <th class="white">Team Details</th>
           </tr>
         </thead>
-
-        <tbody class="white" id="coursesBody">
+        <tbody class="white" id="teamBody">
         </tbody>
       </table>
     </main>
@@ -108,6 +108,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
-    <script src="scripts/courses.js"></script>
+    <script src="scripts/teams.js"></script>
   </body>
 </html>
