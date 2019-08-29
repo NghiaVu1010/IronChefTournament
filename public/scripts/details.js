@@ -158,7 +158,7 @@ $(function() {
 
     //link to registration for current class
     $("#addMemberBtn").on("click", function() {
-        location.href = "register.html?courseId=" + courseId;
+        location.href = "add_member.html?teamId=" + teamId;
     });
 
     $("#deleteBtn").on("click", function() {
