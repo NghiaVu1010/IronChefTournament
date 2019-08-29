@@ -1,0 +1,16 @@
+.space-top {
+    padding-top: 70px;
+}
+
+.data-point {
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: "arial black", helvetica, arial, sans-serif;
+    letter-spacing: -5px;
+    
+    text-shadow: 3px 3px 8px rgba(255,255,255,0.45);
+}
+
+.fa-pencil-alt {
+    font-size: .8em;
+}
