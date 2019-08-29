@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    
+    <link rel="stylesheet" type="text/css" href="styles/site.css" />
+    <link rel="stylesheet" type="text/css" href="styles/add_member.css" />
+    <link rel="shortcut icon" type="image/png" href="images/favicon.jpg"/>
+    <title>Iron Chef Tournament</title>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+      <a class="navbar-brand obli" href="#">Iron Chef</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop" aria-controls="navbarTop" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        
+      <!-- Nav bar links -->
+      <div class="collapse navbar-collapse" id="navbarTop">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link bold" href="#">Team Detail</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <h1 class="white obli space-top data-point">Registration</h1>
+
+      <div class="form-group">
+          <label for="teamId">Team ID</label>
+          <input type="text" class="form-control" id="teamId" name="teamid" readonly/>
+        </div>
+
+      <div class="container">
+        <!-- Registration Form -->
+        <form class="row white" id="memberForm">
+          <div class="col-md-5">
+
+            
+  
+            <div class="form-group">
+              <label for="nameField">Name</label>
+              <input type="text" class="form-control" id="nameField" name="membername" required/>
+            </div>
+  
+            <div class="form-group">
+              <label for="emailField">Email</label>
+              <input type="text" class="form-control" id="emailField" name="email" required/>
+            </div>
+  
+            <div class="form-group">
+              <label for="phoneField">Phone: </label>
+              <input type="text" class="form-control" id="phoneField" name="phone" required/>
+            </div>
+  
+            <div class="form-group">
+              <label for="contactField">Contact Name: </label>
+              <input type="text" class="form-control" id="contactField" name="contactname" required/>
+            </div>
+    
+            <div class="form-group">
+              <label for="ageField">Age: </label>
+              <select class="form-control" id="ageField" name="age" required>
+                <option value="" selected>...</option>
+              </select>
+            </div>
+  
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="maleGender" value="Male">
+              <label class="form-check-label" for="maleGender">Male</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="Female">
+              <label class="form-check-label" for="femaleGender">Female</label>
+            </div>
+
+          </div>
+
+
+
+
+          <!-- <div class="w-100"></div> -->
+
+          <div id="msgDiv"> 
+            <ul id="errorMessages"></ul> 
+          </div>
+
+
+        </form>
+
+        <input type="button" class="col-md-4 btn btn-primary bold" id="confirmBtn" value="Confirm" />
+        <input type="button" class="col-md-4 btn btn-secondary bold" id="cancelBtn" value="Cancel" />
+
+      </div>
+    </main>
+
+    <footer class="container white">
+      <hr class="bg-white">
+      <p>&copy;Hartcode Academy 2019</p>
+    </footer>  
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <script src="scripts/add_member.js"></script>
+  </body>
+</html>
