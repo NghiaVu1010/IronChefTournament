@@ -186,6 +186,14 @@ app.get("/index.html", function (req, res) {
     res.sendFile( __dirname + "/public/" + "details.html" );
  })
 
+ app.get("/add_member.html", function (req, res) {
+    res.sendFile( __dirname + "/public/" + "add_member.html" );
+ })
+
+ app.get("/add_team.html", function (req, res) {
+    res.sendFile( __dirname + "/public/" + "add_team.html" );
+ })
+
 // TODO:  YOU WILL NEED TO ADD MORE CALLS TO app.get() FOR EACH PAGE
 //        YOU END UP BUILDING
 
@@ -326,7 +334,9 @@ app.post("/api/teams", urlencodedParser, function (req, res) {
    
     //console.log("New team added: ");
 	//logOneTeam(team);
-    res.status(200).send();
+    //res.status(200).send();
+
+    res.end( JSON.stringify(team) );
  })
 
  // EDIT A TEAM

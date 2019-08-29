@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     
     <link rel="stylesheet" type="text/css" href="styles/site.css" />
-    <link rel="stylesheet" type="text/css" href="styles/add_member.css" />
+    <link rel="stylesheet" type="text/css" href="styles/add_team.css" />
     <link rel="shortcut icon" type="image/png" href="images/favicon.jpg"/>
     <title>Iron Chef Tournament</title>
   </head>
@@ -35,60 +35,84 @@
     </nav>
 
     <main>
-      <h1 class="white obli space-top data-point">Registration</h1>
+      <h1 class="white obli space-top data-point">Register Team</h1>
 
       <div class="container">
         <!-- Registration Form -->
-        <form class="row white" id="memberForm">
+        <form class="row white" id="teamForm">
           <div class="col-md-5">
+
+
             <div class="form-group">
-              <label for="teamId">Team ID</label>
-              <input type="text" class="form-control" id="teamId" name="teamid" readonly/>
+              <label for="teamNameField">Team Name</label>
+              <input type="text" class="form-control" id="teamNameField" name="teamname"/>
+            </div>
+
+            <div>
+              <label for="divisionDDL" class="white">Category: </label>
+              <select class="custom-select" id="divisionDDL" name="leaguecode" required>
+                <option selected value="">Choose...</option>
+              </select>
             </div>
   
             <div class="form-group">
-              <label for="nameField">Name</label>
-              <input type="text" class="form-control" id="nameField" name="membername" required/>
+              <label for="managerNameField">Manager Name</label>
+              <input type="text" class="form-control" id="managerNameField" name="managername" required/>
             </div>
   
             <div class="form-group">
-              <label for="emailField">Email</label>
-              <input type="text" class="form-control" id="emailField" name="email" required/>
+              <label for="managerEmailField">Manager Email</label>
+              <input type="text" class="form-control" id="managerEmailField" name="manageremail" required/>
             </div>
   
             <div class="form-group">
-              <label for="phoneField">Phone: </label>
-              <input type="text" class="form-control" id="phoneField" name="phone" required/>
-            </div>
-  
-            <div class="form-group">
-              <label for="contactField">Contact Name: </label>
-              <input type="text" class="form-control" id="contactField" name="contactname" required/>
+              <label for="managerPhoneField">Manager Phone: </label>
+              <input type="text" class="form-control" id="managerPhoneField" name="managerphone" required/>
             </div>
     
             <div class="form-group">
-              <label for="ageField">Age: </label>
-              <select class="form-control" id="ageField" name="age" required>
+              <label for="minAgeField">Min Age: </label>
+              <select class="form-control" id="minAgeField" name="minmemberage" required>
+                <option value="" selected>...</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="maxAgeField">Max Age: </label>
+              <select class="form-control" id="maxAgeField" name="maxmemberage" required>
+                <option value="" selected>...</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="maxTeamField">Max Team Size: </label>
+              <select class="form-control" id="maxTeamField" name="maxteammembers" required>
                 <option value="" selected>...</option>
               </select>
             </div>
   
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="gender" id="maleGender" value="Male">
+              <input class="form-check-input" type="radio" name="teamgender" id="maleGender" value="Male">
               <label class="form-check-label" for="maleGender">Male</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="Female">
+              <input class="form-check-input" type="radio" name="teamgender" id="femaleGender" value="Female">
               <label class="form-check-label" for="femaleGender">Female</label>
             </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="teamgender" id="anyGender" value="Any">
+              <label class="form-check-label" for="anyGender">Any</label>
+            </div>
           </div>
+
+
           <!-- <div class="w-100"></div> -->
           <div id="msgDiv"> 
             <ul id="errorMessages"></ul> 
           </div>
         </form>
 
-        <input type="button" class="col-md-4 btn btn-primary bold" id="confirmBtn" value="Confirm" />
+        <input type="button" class="col-md-4 btn btn-primary bold" id="addTeamBtn" value="Add Team" />
         <input type="button" class="col-md-4 btn btn-secondary bold" id="cancelBtn" value="Cancel" />
 
       </div>
@@ -105,6 +129,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
-    <script src="scripts/add_member.js"></script>
+    <script src="scripts/add_team.js"></script>
   </body>
 </html>
