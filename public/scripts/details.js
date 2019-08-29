@@ -117,13 +117,14 @@ function removeMember(teamId, memberId) {
 
     let serial = `teamid=${teamId}&memberid=${memberId}`;
 
-    $.post(`/api/teams/${teamId}/members/${memberId}`, serial, function(data) {
-
-    })
+    $.ajax({
+        type: "DELETE",
+        url: `/api/teams/${teamId}/members/${memberId}`,
+        data: serial
+        })
         .done(function() {
             alert("Deleted successfully!");
             location.reload();
-            //location.href = "details.html?courseId=" + courseId;
         })
         .fail(function() {
             alert("There was a problem, please try again.");
@@ -156,7 +157,7 @@ $(function() {
     });
 
     //link to registration for current class
-    $("#registerBtn").on("click", function() {
+    $("#addMemberBtn").on("click", function() {
         location.href = "register.html?courseId=" + courseId;
     });
 
