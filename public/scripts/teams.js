@@ -63,7 +63,6 @@ $(function() {
     $.getJSON("/api/leagues", (data) => {
         divisionData = data;
         buildList($("#divisionDDL"), divisionData);
-        
     });
     
     // Populate table based on selection
@@ -102,9 +101,9 @@ $(function() {
         allData = data;
     });
 
-    // $("#addCourseBtn").on("click", function() {
-    //     location.href = "add_course.html";
-    // });
+    $("#addTeamBtn").on("click", function() {
+        location.href = "add_team.html";
+    });
 
     // Displays all courses currently offered when clicked
     $("#viewAllBtn").on("click", function() {

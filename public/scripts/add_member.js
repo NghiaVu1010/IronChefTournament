@@ -87,7 +87,7 @@ $(function() {
         console.log($("#memberForm").serialize());
 
         addMember(teamId);
-        //location.href = "details.html?teamId=" + teamId;
+        location.href = "details.html?teamId=" + teamId;
     });
 
     //cancel back to details
