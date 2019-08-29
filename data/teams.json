@@ -47,8 +47,8 @@
 		"ManagerName": "Natalie Plyers",
 		"ManagerPhone": "817-555-5454",
 		"ManagerEmail": "Natalie214@aol.com",
-		"MinAge": 21,
-		"MaxAge": 99,
+		"MinMemberAge": 21,
+		"MaxMemberAge": 99,
 		"MaxTeamMembers": 8,
 		"TeamGender": "Male",
 		"Members": [
@@ -79,8 +79,8 @@
 		"ManagerName": "Natalie Plyers",
 		"ManagerPhone": "817-555-5454",
 		"ManagerEmail": "Natalie214@aol.com",
-		"MinAge": 21,
-		"MaxAge": 99,
+		"MinMemberAge": 21,
+		"MaxMemberAge": 99,
 		"MaxTeamMembers": 2,
 		"TeamGender": "Male",
 		"Members": [
@@ -102,8 +102,8 @@
 		"ManagerName": "Natalie Plyers",
 		"ManagerPhone": "817-555-5454",
 		"ManagerEmail": "Natalie214@aol.com",
-		"MinAge": 21,
-		"MaxAge": 99,
+		"MinMemberAge": 21,
+		"MaxMemberAge": 99,
 		"MaxTeamMembers": 2,
 		"TeamGender": "Male",
 		"Members": [

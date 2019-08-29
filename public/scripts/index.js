@@ -15,6 +15,6 @@ $(function() {
     //stick_top_nav();
 
     $("#viewTeamBtn").on("click", function() {
-        location.href = "courses.html";
+        location.href = "teams.html";
     });
 });
