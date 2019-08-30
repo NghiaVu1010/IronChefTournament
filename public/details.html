@@ -65,9 +65,80 @@
 
             <div class="modal-body"></div>
 
+            <form id="editTeamForm">
+              <div class="container">
+                <div class="form-group">
+                  <label for="teamNameField">Team Name</label>
+                  <input type="text" class="form-control" id="teamNameField" name="teamname"/>
+                </div>
+      
+                <div>
+                  <label for="leagueField">League Code</label>
+                  <input type="text" class="form-control" id="leagueField" name="leaguecode" readonly/>
+                  <small>Please create a new team if you want to switch leagues</small>
+                </div>
+      
+                <div class="form-group">
+                  <label for="managerNameField">Manager Name</label>
+                  <input type="text" class="form-control" id="managerNameField" name="managername" required/>
+                </div>
+      
+                <div class="form-group">
+                  <label for="managerEmailField">Manager Email</label>
+                  <input type="text" class="form-control" id="managerEmailField" name="manageremail" required/>
+                </div>
+      
+                <div class="form-group">
+                  <label for="managerPhoneField">Manager Phone: </label>
+                  <input type="text" class="form-control" id="managerPhoneField" name="managerphone" required/>
+                </div>
+          
+                <div class="row">
+                  <div class="form-group col-md-3">
+                    <label for="minAgeField">Min Age:</label>
+                    <select class="form-control" id="minAgeField" name="minmemberage" required>
+                      <option value="" selected>...</option>
+                    </select>
+                  </div>
+        
+                  <div class="form-group col-md-3">
+                    <label for="maxAgeField">Max Age:</label>
+                    <select class="form-control" id="maxAgeField" name="maxmemberage" required>
+                      <option value="" selected>...</option>
+                    </select>
+                  </div>
+        
+                  <div class="form-group col-md-3">
+                    <label for="maxTeamField">Team Size:</label>
+                    <select class="form-control" id="maxTeamField" name="maxteammembers" required>
+                      <option value="" selected>...</option>
+                    </select>
+                  </div>
+                </div>
+      
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="teamgender" id="maleGender" value="Male">
+                  <label class="form-check-label" for="maleGender">Male</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="teamgender" id="femaleGender" value="Female">
+                  <label class="form-check-label" for="femaleGender">Female</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="teamgender" id="anyGender" value="Any">
+                  <label class="form-check-label" for="anyGender">Any</label>
+                </div>
+              </div>
+            </form>
+      
+              <!-- <div class="w-100"></div> -->
+              <div id="msgDiv"> 
+                <ul id="errorMessages"></ul> 
+              </div>
+
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-danger" id="cancelModalBtn" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-outline-primary" id="confirmModalBtn" data-dismiss="modal">Confirm</button>
+              <button type="button" class="btn btn-outline-primary" id="confirmModalBtn">Confirm</button>
             </div>
           </div>
         </div>
