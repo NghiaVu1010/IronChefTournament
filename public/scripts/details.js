@@ -56,9 +56,17 @@ function createManagerCard(team) {
     let cardText1 = $("<p>", {text: "Phone # - " + team.ManagerPhone});
     let cardText2 = $("<p>", {text: "Email - " + team.ManagerEmail})
 
+    let editTeam = $("<button>", {type: "button", 
+        class: "float-right", 
+        id: "editTeam" + team.TeamId, 
+        html: "<i class='fas fa-pencil-alt'></i>"});
+
     // Append the head/body
     card.append(cardHead)
         .append(cardBody);
+
+    // Append the button
+    cardHead.append(editTeam);
 
     // Append each element to the body
     cardBody.append(cardTitle)
@@ -158,35 +166,152 @@ function createMemberCard(member) {
 * Dynamically create a modal to edit the team
 * 
 * WIP
+* UPDATE - Too ugly to dynamically create. The form fields have too many different options
+*   that defeats the purpose of a generic creation. Will come back if I have an epiphany.
 */
-function createEditModal(list) {
-    let form = $("<form>", {id: "editForm"});
+function createEditTeamModal(list) {
+    let form = $("<form>", {id: "editTeamForm"});
     let newDiv = $("<div>", {class: "form-group"});
-    let labelArr = ["Email:","Member Name:", "Contact Name:", "Age:", "Gender:", "Phone:"];
+    let labelArr = ["Team Name:","Manager Name:", "Manager Phone:", "Manager Email:", 
+        "Max Team Members:", "Min Member Age:", "Max Member Age:", "Team Gender:"];
 
-    $(".modal-title").text("Edit");
+    $(".modal-title").text("Edit Team");
     $(".modal-body").empty()
         .append(form);
 
     let i = 0;
     for(let key in list) {
-        if(key != "MemberId") {
-            newDiv = $("<div>", {class: "form-group"});
 
-            let newLabel = $("<label>", {for: "modal-" + key + "-" + list.MemberId, text: labelArr[i]});
-            let newInput = $("<input>", {type: "text", 
-                class: "form-control", 
-                id: "modal-" + key + "-" + list.MemberId, 
-                name: key.toLowerCase(), 
-                value: list[key]});
-            
+        if(key != "TeamId" && key != "League" && key != "Members") {
+
+            if(key != "TeamGender") newDiv = $("<div>", {class: "form-group"});
+            else newDiv = $("<div>", {class: "form-check"});
             form.append(newDiv);
-            newDiv.append(newLabel)
-                .append(newInput);
 
+            let newLabel = $("<label>", {for: "modal-" + key + "-" + list.TeamId, text: labelArr[i]});
+            newDiv.append(newLabel);
+            
+            let newSelect;
             i++;
+
+            switch(key) {
+                case 'TeamId':
+                    // Do nothing
+                    break;
+
+                case 'League':
+                    // Do nothing
+                    break;
+
+                case 'MaxTeamMembers': {
+                    newSelect = $("<select>", {class: "form-control",
+                        id: "modal-" + key + "-" + list.TeamId,
+                        name: key.toLowerCase(),
+                        required: "true"});
+
+                    newDiv.append(newSelect);
+
+                    for(let i = 2; i <= 8; i++) {
+                        let teamSize = $("<option>", {text: i, value: i});
+                        newSelect.append(teamSize);
+                    };
+                    break;
+                }
+
+                case 'MinMemberAge': {
+                    newSelect = $("<select>", {class: "form-control",
+                        id: "modal-" + key + "-" + list.TeamId,
+                        name: key.toLowerCase(),
+                        required: "true"});
+
+                    newDiv.append(newSelect);
+
+                    for(let i = 13; i <= 100; i++) {
+                        let ageOption = $("<option>", {text: i, value: i});
+                        newSelect.append(ageOption);
+                    };
+                    break;
+                }
+
+                case 'MaxMemberAge': {
+                    newSelect = $("<select>", {class: "form-control",
+                    id: "modal-" + key + "-" + list.TeamId,
+                    name: key.toLowerCase(),
+                    required: "true"});
+
+                    newDiv.append(newSelect);
+
+                    for(let i = 13; i <= 100; i++) {
+                        let ageOption = $("<option>", {text: i, value: i});
+                        newSelect.append(ageOption);
+                    };
+                    break;
+                }
+
+                case 'TeamGender':
+                    newDiv = $("<div>", {class: "form-check"});
+
+                    let newInput = $("<input>", {type: "text", 
+                        class: "form-control", 
+                        id: "modal-" + key + "-" + list.TeamId, 
+                        name: key.toLowerCase(), 
+                        value: list[key]});
+                    break;
+
+                case 'Members':
+                    // Do nothing
+                    break;
+
+                default: {
+                    let newInput = $("<input>", {type: "text", 
+                        class: "form-control", 
+                        id: "modal-" + key + "-" + list.TeamId, 
+                        name: key.toLowerCase(), 
+                        value: list[key]});
+
+                    newDiv.append(newInput);
+                    break;
+                }
+            }
         }
     }
+}
+
+
+/*
+* Prefill modal to edit team with team info
+*
+* @param ageOption (Object) - Option element to be appended
+* @param teamSize (Object) - Option element to be appended
+*/
+function prefillModal(list) {
+    $(".modal-title").text("Edit Team");
+    $(".modal-body").empty();
+
+    for(let i = 13; i <= 100; i++) {
+        let ageOption = $("<option>", {text: i, value: i});
+        $("#minAgeField").append(ageOption);
+    };
+
+    for(let i = 13; i <= 100; i++) {
+        let ageOption = $("<option>", {text: i, value: i});
+        $("#maxAgeField").append(ageOption);
+    };
+
+    for(let i = 2; i <= 8; i++) {
+        let teamSize = $("<option>", {text: i, value: i});
+        $("#maxTeamField").append(teamSize);
+    };
+    
+    $("#teamNameField").val(list.TeamName);
+    $("#leagueField").val(list.League);
+    $("#managerNameField").val(list.ManagerName);
+    $("#managerEmailField").val(list.ManagerEmail);
+    $("#managerPhoneField").val(list.ManagerPhone);
+    $("#minAgeField").val(list.MinMemberAge);
+    $("#maxAgeField").val(list.MaxMemberAge);
+    $("#maxTeamField").val(list.MaxTeamMembers);
+    $("input[name='teamgender'][value='" + list.TeamGender + "']")[0].checked = true;
 }
 
 /*
@@ -203,8 +328,8 @@ function createEditModal(list) {
 * @param editCard (Object) - Edit button created for that member
 * @param removeCard (Object) - Remove/delete button created for that member
 */
-function createEditModal(list) {
-    let form = $("<form>", {id: "editForm"});
+function createEditMemberModal(list) {
+    let form = $("<form>", {id: "editMemberForm"});
     let newDiv = $("<div>", {class: "form-group"});
     let labelArr = ["Email:","Member Name:", "Contact Name:", "Age:", "Gender:", "Phone:"];
 
@@ -238,7 +363,7 @@ function createEditModal(list) {
 * 
 * @param newP (Object) - Element to confirm if the user wants to delete
 */
-function createRemoveModal(list) {
+function createRemoveMemberModal(list) {
     let newP = $("<p>", {text: `Are you sure you want to delete ${list.MemberName} from this team?`});
 
     $(".modal-title").text("Delete");
@@ -249,16 +374,18 @@ function createRemoveModal(list) {
 /*
 * AJAX call to edit team info
 *
-* WIP to be used with edit team modal
+* @param serial (String) - Concatenated serial form
 */
-function editTeam(teamId, memberId) {
+function editTeam(teamId) {
+    let serial = `teamid=${teamId}&` + $("#editTeamForm").serialize();
+
     $.ajax({
         type: "PUT",
         url: `/api/teams`,
         data: serial
         })
         .done(function() {
-            alert("Edit successful!");
+            alert("Edit team successful!");
             location.reload();
         })
         .fail(function() {
@@ -274,7 +401,7 @@ function editTeam(teamId, memberId) {
 * @param serial (String) - Concatenated serial form
 */
 function editMember(teamId, memberId) {
-    let serial = `teamid=${teamId}&memberid=${memberId}&` + $("#editForm").serialize();
+    let serial = `teamid=${teamId}&memberid=${memberId}&` + $("#editMemberForm").serialize();
 
     $.ajax({
         type: "PUT",
@@ -311,6 +438,95 @@ function removeMember(teamId, memberId) {
     return false;
 }
 
+
+function validateForm() {
+    let errMsg = [];
+    let allInput = $("input[type='text']");
+    let regExp = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+    for(let i = 0; i < allInput.length; i++){
+        if($("#" + allInput[i].id).val().trim() == "") {
+            errMsg[errMsg.length] = allInput[i].name + " is required";
+
+            
+        }
+        else if(allInput[i].name == "manageremail") {
+            if(regExp.test($("#managerEmailField").val()) == false) {
+                errMsg[errMsg.length] = "Please enter a valid email";
+            }
+        }
+    }
+
+    if($("#divisionDDL").val() == "") {
+        errMsg[errMsg.length] = "category is required";
+    }
+
+    if($("#minAgeField").val() == "") {
+        errMsg[errMsg.length] = "Please select min age";
+    }
+
+    if($("#maxAgeField").val() == "") {
+        errMsg[errMsg.length] = "Please select max age";
+    }
+
+    if($("#maxTeamField").val() == "") {
+        errMsg[errMsg.length] = "Please select team size";
+    }
+
+    if($("input[name='teamgender']:checked").val() == undefined) {
+        errMsg[errMsg.length] = "Please select gender";
+    }
+    
+    $("#errorMessages").empty();
+    if (errMsg.length == 0) {
+        return true;
+    }
+    else {
+        for(let i = 0; i < errMsg.length; i++) {
+            $("<li>" + errMsg[i] + "</li>").appendTo($("#errorMessages"));
+        }
+        return false;
+    }
+}
+
+function validateEditMemberForm() {
+    let errMsg = [];
+    let allInput = $("input[type='text']");
+
+    let regExp = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+    for(let i = 0; i < allInput.length; i++){
+        if($("#" + allInput[i].id).val().trim() == "") {
+            errMsg[errMsg.length] = allInput[i].name + " is required";
+        }
+    }
+
+    if(regExp.test($("#emailField").val()) == false) {
+        errMsg[errMsg.length] = "Please enter a valid email";
+    }
+
+    if($("#ageField").val() == "") {
+        errMsg[errMsg.length] = "Please select your age";
+    }
+
+    // console.log($("input[name='gender']:checked").val());
+    if($("input[name='gender']:checked").val() == undefined) {
+        errMsg[errMsg.length] = "Please select your gender";
+    }
+
+    $("#errorMessages").empty();
+
+    if (errMsg.length == 0) {
+        return true;
+    }
+    else {
+        for(let i = 0; i < errMsg.length; i++) {
+            $("<li>" + errMsg[i] + "</li>").appendTo($("#errorMessages"));
+        }
+        return false;
+    }
+}
+
 $(function() {
     let urlParams = new URLSearchParams(location.search);
     let teamId = urlParams.get("teamId");
@@ -328,12 +544,14 @@ $(function() {
         objs = data;
         showData(objs)
 
+        // Wire in a on click event button to create a modal to edit/remove each team member
         for(let i = 0; i < objs.Members.length; i++) {
             $("#removeMember" + objs.Members[i].MemberId).on("click", function() {
                 currMemberId = objs.Members[i].MemberId;
 
                 action = "remove";
-                createRemoveModal(objs.Members[i]);
+                createRemoveMemberModal(objs.Members[i]);
+                $("#editTeamForm").hide();
                 $("#actionModal").modal(focus);
             });
 
@@ -341,11 +559,21 @@ $(function() {
                 currMemberId = objs.Members[i].MemberId;
 
                 action = "edit";
-                createEditModal(objs.Members[i]);
+                createEditMemberModal(objs.Members[i]);
+                $("#editTeamForm").hide();
                 $("#actionModal").modal(focus);
             });
         }
 
+        // Wire in a on click for the edit team
+        $("#editTeam" + teamId).on("click", function() {
+            action = "team";
+
+            prefillModal(objs);
+            $("#editTeamForm").show();
+            //createEditTeamModal(objs);
+            $("#actionModal").modal(focus);
+        });
     });
 
     // Link to add a new team member
@@ -361,10 +589,16 @@ $(function() {
     // Confirm modal button switches based on what action is being done with modal
     $("#confirmModalBtn").on("click", function () {
         switch(action) {
-            case 'edit':
+            case 'team': {
+                let isValid = validateForm();
+                if (!isValid) return;
+                editTeam(teamId);
+                break;
+            }
+            case 'edit': {
                 editMember(teamId, currMemberId);
                 break;
-
+            }
             case 'remove': {
                 removeMember(teamId, currMemberId);
                 break;

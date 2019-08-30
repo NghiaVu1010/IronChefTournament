@@ -103,8 +103,8 @@ $(function() {
     };
 
     for(let i = 2; i <= 8; i++) {
-        let ageOption = $("<option>", {text: i, value: i});
-        $("#maxTeamField").append(ageOption);
+        let teamSize = $("<option>", {text: i, value: i});
+        $("#maxTeamField").append(teamSize);
     };
 
     $("input[type='text']").on("focus", function() {
