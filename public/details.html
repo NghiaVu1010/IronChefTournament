@@ -39,17 +39,19 @@
 
       <!-- Display details -->
       <div class="container">
+        <!-- Manager/Team Card generated here -->
         <section class="row" id="team-details"></section>
+        <!-- Player Cards generated here -->
         <section class="row" id="team-members"></section>
 
-        <div class="w-100"></div>
+        <!-- <div class="w-100"></div> -->
 
-        <!-- Buttons to register or cancel-->
+        <!-- Buttons to Add team members or cancel-->
         <input type="button" class="col-md-2 btn btn-outline-primary bold" id="addMemberBtn" value="Add Member" />
         <input type="button" class="col-md-2 btn btn-outline-secondary bold" id="cancelBtn" value="Cancel" />
       </div>
 
-      <!-- Modal -->
+      <!-- Dynamically generated Modal to Edit Team, Edit Member, or Delete Member -->
       <div class="modal fade" tabindex="-1" id="actionModal" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
