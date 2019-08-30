@@ -17,32 +17,75 @@ function displayData(list) {
 /*
 * Insert data into table with a new row
 * 
-* @param courseId (String) - set value to courseId data
-* @param courseTitle (String) - set value to Title data
-* @param courseMeets (String) - set value to Meets data
-* @param element (Object) - Create an row element to build table
+* @param newRow (Object) - Create a blank row to be appended
+* @param teamIdElement (Object) - Create a cell for team id
+* @param teamNameElement (Object) - Create a cell for team name
+* @param managerNameElement (Object) - Create a cell for manager name
+* @param membersLenElement (Object) - Create a cell for amount of members
+* @param newTd (Object) - Create a blank td to be appended
+* @param detailElement (Object) - Create a detail button to redirect
+* @param deleteElement (Object) - Create a delete button to delete
 */
 function insertTableRow(list) {
     // Create row to append interested data
     let newRow = $("<tr>");
+
+    // Create interested elements to be appended
     let teamIdElement = $("<td>", {text: list.TeamId});
     let teamNameElement = $("<td>", {text: list.TeamName});
     let managerNameElement = $("<td>", {text: list.ManagerName});
     let membersLenElement = $("<td>", {text: list.Members.length});
     
-    // Create data specifically for view details
+    // Create data specifically for view/delete team
     let newTd = $("<td>");
-    let detailElement = $("<a>", {text: "View / Edit", href: "details.html?teamId=" + list.TeamId, class: "anchorDetail"});
+    let detailElement = $("<button>", {type: "button", 
+        class: "btn btn-outline-success mx-1",
+        id: "detailTeam" + list.TeamId, 
+        text: "Details"});
+    let deleteElement = $("<button>", {type: "button", 
+        class: "btn btn-outline-danger mx-1",
+        id: "removeTeam" + list.TeamId, 
+        text: "Delete"});
 
+    // Append the row to the body
     $("#teamBody").append(newRow);
 
+    // Append interested elements
     newRow.append(teamIdElement)
         .append(teamNameElement)
         .append(managerNameElement)
         .append(membersLenElement)
         .append(newTd);
 
-    newTd.append(detailElement);
+    // Append edit/delete icons
+    newTd.append(detailElement)
+        .append(deleteElement);
+
+    // Wire in click event for view details
+    $("#detailTeam" + list.TeamId).on("click", () => {
+        location.href = `details.html?teamId=${list.TeamId}`;
+    });
+
+    // Wire in click event for view details
+    $("#removeTeam" + list.TeamId).on("click", () => {
+        // Save team id for deletion
+        sessionStorage.setItem("teamid", list.TeamId);
+        createDeleteModal(list);
+        $("#deleteModal").modal(focus);
+    });
+}
+
+/*
+* Dynamically generate delete modal
+* 
+* @param newP (Object) - Create an element to append
+*/
+function createDeleteModal(list) {
+    let newP = $("<p>", {text: "Are you sure you want to delete this team?"});
+
+    $(".modal-body").empty();
+    $(".modal-title").text(list.TeamName);
+    $(".modal-body").append(newP);
 }
 
 /*
@@ -57,8 +100,26 @@ function buildList(dropdown, list) {
     }
 }
 
+// AJAX call to delete a team
+function deleteTeam(teamId) {
+    $.ajax({
+        type: "DELETE",
+        url: `/api/teams/${teamId}`
+        })
+        .done(function() {
+            alert("Deleted successfully!");
+            location.reload();
+        })
+        .fail(function() {
+            alert("There was a problem, please try again.");
+        });
+
+    return false;
+}
+
 $(function() {
-    // Dynamically build DDL with divisions
+
+    // Call to get all divisions and dynamically build DDL
     let divisionData;
     $.getJSON("/api/leagues", (data) => {
         divisionData = data;
@@ -66,9 +127,7 @@ $(function() {
     });
     
     // Populate table based on selection
-    //let courseData;
     $("#teamTable").hide();
-
     $("#divisionDDL").on("change", () => {
         $("#teamBody").empty();
 
@@ -84,32 +143,34 @@ $(function() {
             if($("#divisionDDL").val() == divisionData[i].Code)
                 $("#divisionDetails").text(divisionData[i].Description);
         }
-
-        console.log($("#divisionDDL").val());
         
+        // Call to display all teams in that divison
         $.getJSON("/api/teams/byleague/" + $("#divisionDDL").val(), (data) => {
-            
-
-
             displayData(data);
         });
     });
     
-    // Preload all courses
+    // Preload all teams
     let allData;
     $.getJSON("/api/teams", function(data) {
         allData = data;
     });
 
+    // Button redirects to add a team
     $("#addTeamBtn").on("click", function() {
         location.href = "add_team.html";
     });
 
-    // Displays all courses currently offered when clicked
+    // Displays all teams when clicked
     $("#viewAllBtn").on("click", function() {
         $("#teamBody").empty();
         $("#teamTable").show();
         displayData(allData);
+    });
+
+    // Modal confirm button to delete the team
+    $("#confirmModalBtn").on("click", function() {
+        deleteTeam(sessionStorage.getItem("teamid"));
     });
 
     // Bind Click Event Handler to Reset Buttom

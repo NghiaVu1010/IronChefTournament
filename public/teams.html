@@ -35,7 +35,7 @@
     </nav>
 
     <main class="m-5">
-      <!-- Custom Header for RIT -->
+      <!-- Custom Header -->
       <header class="container text-center white obli space-top">
         <h1 class="shadows">Iron Chef</h1>
         <h2 class="shadows">Tournament</h2>
@@ -57,7 +57,7 @@
         </div> -->
       </header>
 
-      <!-- Drop down selection of categories -->
+      <!-- Drop down selection of divisons -->
       <form action="#" method="GET">  
         <fieldset>
           <legend class="mt-3 display-4 white obli">Search Divisons:</legend>
@@ -71,7 +71,7 @@
                 <p id="divisionDetails"></p>
               </div>
             
-              <!-- Add/Reset button-->
+              <!-- Add/ViewAll/Reset button-->
               <div class="col-md-6">
                 <button type="button" class="btn btn-success" id="addTeamBtn">Add Team</button>
                 <button type="button" class="btn btn-primary" id="viewAllBtn">View All Teams</button>
@@ -82,6 +82,7 @@
         </fieldset>
       </form>
 
+      <!-- Table to display team info -->
       <table class="table m-3" id="teamTable">
         <thead class="thead-light" id="teamHead">
           <tr>
@@ -89,13 +90,32 @@
             <th class="white">Team Name</th>
             <th class="white">Manager Name</th>
             <th class="white">Current Size</th>
-            <th class="white">Team Details</th>
+            <th class="white">Manage</th>
           </tr>
         </thead>
         <tbody class="white" id="teamBody">
         </tbody>
       </table>
     </main>
+
+    <!-- Modal for deleting a team -->
+    <div class="modal fade" tabindex="-1" id="deleteModal" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">&nbsp;</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" id="cancelModalBtn" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-outline-primary" id="confirmModalBtn" data-dismiss="modal">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <footer class="container white">
       <hr class="bg-white">
