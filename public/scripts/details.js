@@ -113,14 +113,67 @@ function createMemberCard(member) {
     return card;
 }
 
-function removeMember(teamId, memberId) {
+function createEditModal(list) {
+    let form = $("<form>", {id: "editForm"});
+    let newDiv = $("<div>", {class: "form-group"});
+    let labelArr = ["Email:","Member Name:", "Contact Name:", "Age:", "Gender:", "Phone:"];
 
-    let serial = `teamid=${teamId}&memberid=${memberId}`;
+    $(".modal-title").text("Edit");
+    $(".modal-body").empty()
+        .append(form);
+
+    let i = 0;
+    for(let key in list) {
+        if(key != "MemberId") {
+            newDiv = $("<div>", {class: "form-group"});
+
+            let newLabel = $("<label>", {for: "modal-" + key + "-" + list.MemberId, text: labelArr[i]});
+            let newInput = $("<input>", {type: "text", 
+                class: "form-control", 
+                id: "modal-" + key + "-" + list.MemberId, 
+                name: key.toLowerCase(), 
+                value: list[key]});
+            
+            form.append(newDiv);
+            newDiv.append(newLabel)
+                .append(newInput);
+
+            i++;
+        }
+    }
+}
+
+function createRemoveModal(list) {
+    let newP = $("<p>", {text: `Are you sure you want to delete ${list.MemberName} from this team?`});
+
+    $(".modal-title").text("Delete");
+    $(".modal-body").empty()
+        .append(newP);
+}
+
+function editMember(teamId, memberId) {
+    let serial = `teamid=${teamId}&memberid=${memberId}&` + $("#editForm").serialize();
 
     $.ajax({
-        type: "DELETE",
-        url: `/api/teams/${teamId}/members/${memberId}`,
+        type: "PUT",
+        url: `/api/teams/${teamId}/members`,
         data: serial
+        })
+        .done(function() {
+            alert("Edit successfully!");
+            location.reload();
+        })
+        .fail(function() {
+            alert("There was a problem, please try again.");
+        });
+
+    return false;
+}
+
+function removeMember(teamId, memberId) {
+    $.ajax({
+        type: "DELETE",
+        url: `/api/teams/${teamId}/members/${memberId}`
         })
         .done(function() {
             alert("Deleted successfully!");
@@ -139,8 +192,8 @@ $(function() {
 
     //grab course data and show
     let objs;
-
     let currMemberId;
+    let action;
 
     $.getJSON("/api/teams/" + teamId, (data) => {
         objs = data;
@@ -151,18 +204,25 @@ $(function() {
             $("#removeMember" + objs.Members[i].MemberId).on("click", function() {
                 currMemberId = objs.Members[i].MemberId;
 
-                $("#unregisterModal").modal(focus);
+                action = "remove";
+                createRemoveModal(objs.Members[i]);
+                $("#actionModal").modal(focus);
+            });
+
+            $("#editMember" + objs.Members[i].MemberId).on("click", function() {
+                currMemberId = objs.Members[i].MemberId;
+
+                action = "edit";
+                createEditModal(objs.Members[i]);
+                $("#actionModal").modal(focus);
             });
         }
+
     });
 
     //link to registration for current class
     $("#addMemberBtn").on("click", function() {
         location.href = "add_member.html?teamId=" + teamId;
-    });
-
-    $("#deleteBtn").on("click", function() {
-        alert("Coming soon");
     });
 
     //cancel back to courses
@@ -171,6 +231,15 @@ $(function() {
     });
 
     $("#confirmModalBtn").on("click", function () {
-        removeMember(teamId, currMemberId);
+        switch(action) {
+            case 'edit':
+                editMember(teamId, currMemberId);
+                break;
+
+            case 'remove': {
+                removeMember(teamId, currMemberId);
+                break;
+            }
+        }
     });
 });
