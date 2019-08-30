@@ -1,3 +1,7 @@
+tr, td {
+    text-align: center;
+}
+
 .shadows {
     font-weight: bold;
     font-family: "arial black", helvetica, arial, sans-serif;
@@ -25,14 +29,6 @@
 
 .space-top {
     padding-top: 20px;
-}
-
-.anchorDetail {
-    color: #ffffff;
-}
-
-.anchorDetail:hover {
-    background-color: #ffffff;
 }
 
 #divisionDDL {
