@@ -1,5 +1,6 @@
 /*
-* Description: 
+* Description: Recieves and displays all data into a table format.
+*   Allows for the ability to view details/delete a team.
 *
 * Author: Neo
 */
@@ -9,8 +10,19 @@
 * Handle data to be displayed
 */
 function displayData(list) {
+    let empty = true;
     for(let i = 0; i < list.length; i++) {
-        insertTableRow(list[i]);
+        if(($("input[name='gender']:checked").val() == list[i].TeamGender) || ($("input[name='gender']:checked").val() == "Any")) {
+            insertTableRow(list[i]);
+            empty = false;
+        }
+    }
+
+    // Check to see if there were no teams found
+    $("#emptyDiv").empty();
+    if(empty == true) {
+        let emptyElement = $("<p>", {text: "No teams founds! Please try a different search criteria.", class: "text-center white"});
+        $("#emptyDiv").append(emptyElement);
     }
 }
 
@@ -31,10 +43,11 @@ function insertTableRow(list) {
     let newRow = $("<tr>");
 
     // Create interested elements to be appended
-    let teamIdElement = $("<td>", {text: list.TeamId});
+    //let teamIdElement = $("<td>", {text: list.TeamId});
     let teamNameElement = $("<td>", {text: list.TeamName});
     let managerNameElement = $("<td>", {text: list.ManagerName});
-    let membersLenElement = $("<td>", {text: list.Members.length});
+    let managerEmailElement = $("<td>", {text: list.ManagerEmail})
+    let membersLenElement = $("<td>", {text: list.Members.length + ` (max: ${list.MaxTeamMembers})`});
     
     // Create data specifically for view/delete team
     let newTd = $("<td>");
@@ -51,9 +64,9 @@ function insertTableRow(list) {
     $("#teamBody").append(newRow);
 
     // Append interested elements
-    newRow.append(teamIdElement)
-        .append(teamNameElement)
+    newRow.append(teamNameElement)
         .append(managerNameElement)
+        .append(managerEmailElement)
         .append(membersLenElement)
         .append(newTd);
 

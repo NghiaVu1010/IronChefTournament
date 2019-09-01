@@ -1,22 +1,22 @@
 [
 	{
-		"Name": "Minor Iron Chef",
-		"Code": "MinorChef",
-		"Description": "This league consists of teams based on younger (18-) chefs"
+		"Name": "Junior Iron Chef",
+		"Code": "JuniorChef",
+		"Description": "\u2022 This league consists of teams based on junior chefs"
 	},
 	{
 		"Name": "Amatuer Iron Chef",
 		"Code": "AmatuerChef",
-		"Description": "This league consists of teams based on amatuer chefs"
+		"Description": "\u2022 This league consists of teams based on amatuer chefs"
 	},
 	{
 		"Name": "Professional Iron Chef",
 		"Code": "ProfessionalChef",
-		"Description": "This league consists of professional based teams"
+		"Description": "\u2022 This league consists of professional based teams"
     },
     {
 		"Name": "Master Iron Chef",
 		"Code": "MasterChef",
-		"Description": "This league consists of the best of the best"
+		"Description": "\u2022 This league consists of the best of the best"
 	}
 ]

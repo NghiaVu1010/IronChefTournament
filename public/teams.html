@@ -18,8 +18,8 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
-      <a class="navbar-brand obli" href="index.html">Iron Chef</a>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-nav">
+      <a class="navbar-brand shadows obli" href="index.html">Iron Chef</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop" aria-controls="navbarTop" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -28,74 +28,79 @@
       <div class="collapse navbar-collapse" id="navbarTop">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link bold" href="index.html">Home</a>
+            <a class="nav-link shadows bold" href="index.html">Home</a>
           </li>
         </ul>
       </div>
     </nav>
 
-    <main class="m-5">
-      <!-- Custom Header -->
-      <header class="container text-center white obli space-top">
-        <h1 class="shadows">Iron Chef</h1>
-        <h2 class="shadows">Tournament</h2>
-
-        <!-- Statistics of RIT -->
-        <!-- <div class="row">
-          <div class="col-md-4">
-            <p class="data-point">83<sup>%</sup></p>
-            <div class="data-text">Faculty with PhD</div>
-          </div>
-          <div class="col-md-4">
-            <p class="data-point">15:1</p>
-            <div class="data-text">Student / Faculty Ratio</div>
-          </div>
-          <div class="col-md-4">
-            <p class="data-point">23</p>
-            <div class="data-text">Average Class Size</div>
-          </div>
-        </div> -->
+    <main>
+      <!-- Custom Header with customized button -->
+      <header class="container text-center bronze obli mt-5">
+        <h1 class="shadows">Who will be the next King of Iron Chef?</h1>
+        <h3 class="white">Want to compete? Get your team and sign up now!</h3>
+        <button type="button" class="btn btn-success my-3" id="addTeamBtn"><span>Create a Team </span></button>
+        <h2 class="shadows">60 Minutes. One winner.</h2>
+        <p class="offset-3 col-6 white">Iron Chef brings the passion of a high-energy kitchen and the thrill of a timed competition. 
+          No two events are the same, with new teams and themes every month, we promise you'll come back for seconds.</p>
       </header>
 
-      <!-- Drop down selection of divisons -->
       <form action="#" method="GET">  
-        <fieldset>
-          <legend class="mt-3 display-4 white obli">Search Divisons:</legend>
-           <div class="container">
-             <div class="row">
-              <div class="col-md-5">
-                <label for="divisionDDL" class="white">Category: </label>
-                <select class="custom-select" id="divisionDDL" required>
-                  <option selected value="">Choose...</option>
-                </select>
-                <p id="divisionDetails"></p>
-              </div>
-            
-              <!-- Add/ViewAll/Reset button-->
-              <div class="col-md-6">
-                <button type="button" class="btn btn-success" id="addTeamBtn">Add Team</button>
-                <button type="button" class="btn btn-primary" id="viewAllBtn">View All Teams</button>
-                <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
-              </div>
+        <fieldset class="container">
+          <legend class="mt-3 display-5 bronze shadows obli">Select a Division:</legend>
+          <!-- Drop down selection of divisons -->
+          <div class="row">
+            <div class="col-lg-3">
+              <select class="custom-select" id="divisionDDL" required>
+                <option selected value="">Choose...</option>
+              </select>
+            </div>
+          
+            <!-- Add/ViewAll/Reset button-->
+            <div class="col-lg-3">
+              <button type="button" class="btn btn-primary" id="viewAllBtn">View All</button>
+              <button type="reset" class="btn btn-secondary" id="resetBtn">Reset</button>
+            </div>
+          </div>
+          
+          <p class="white" id="divisionDetails"></p>
+
+          <!-- Filter by gender -->
+          <div class="white">
+            <h4>Filter by:</h4>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="anyGender" value="Any" checked>
+              <label class="form-check-label" for="anyGender">Any</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="maleGender" value="Male">
+              <label class="form-check-label" for="maleGender">Male</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="Female">
+              <label class="form-check-label" for="femaleGender">Female</label>
             </div>
           </div>
         </fieldset>
       </form>
 
       <!-- Table to display team info -->
-      <table class="table m-3" id="teamTable">
-        <thead class="thead-light" id="teamHead">
-          <tr>
-            <th class="white">Team ID</th>
-            <th class="white">Team Name</th>
-            <th class="white">Manager Name</th>
-            <th class="white">Current Size</th>
-            <th class="white">Manage</th>
-          </tr>
-        </thead>
-        <tbody class="white" id="teamBody">
-        </tbody>
-      </table>
+      <div class="container">
+        <table class="table m-3" id="teamTable">
+          <thead id="teamHead">
+            <tr>
+              <th class="white">Team Name</th>
+              <th class="white">Manager Name</th>
+              <th class="white">Email</th>
+              <th class="white">Current Size</th>
+              <th class="white">Manage</th>
+            </tr>
+          </thead>
+          <tbody class="white" id="teamBody">
+          </tbody>
+        </table>
+        <div id="emptyDiv"></div>
+      </div>
     </main>
 
     <!-- Modal for deleting a team -->
@@ -117,8 +122,14 @@
       </div>
     </div>
 
-    <footer class="container white">
+    <footer class="container white text-center">
       <hr class="bg-white">
+      <p>
+        <i class="fab fa-twitter-square"></i>
+        <i class="fab fa-facebook-square"></i>
+        <i class="fab fa-youtube-square"></i>
+        <i class="fab fa-instagram"></i>
+      </p>
       <p>&copy;Hartcode Academy 2019</p>
     </footer>  
 

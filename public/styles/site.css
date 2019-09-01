@@ -12,8 +12,19 @@ body {
     font-style: oblique;
 }
 
+.shadows {
+    font-weight: bold;
+    font-family: "arial black", helvetica, arial, sans-serif;
+    
+    text-shadow: 3px 3px 8px rgba(255,0,0,0.45);
+}
+
 .white {
     color: #ffffff;
+}
+
+.bronze {
+    color: #ee963e;
 }
 
 .bg-white {
@@ -22,4 +33,31 @@ body {
 
 .bold {
     font-weight: bold;
+}
+
+.bg-nav {
+    /* background: rgba(128, 128, 128, .5); */
+    /* opacity: .5; */
+}
+
+.space-top {
+    padding-top: 20px;
+}
+
+.fa-twitter-square {
+    font-size: 3em;
+    color: #00acee;
+}
+
+.fa-facebook-square {
+    font-size: 3em;
+    color: #3b5998;
+}
+.fa-youtube-square {
+    font-size: 3em;
+    color: #c4302b;
+}
+.fa-instagram {
+    font-size: 2.8em;
+    background: linear-gradient(to bottom left, #cc00ff 0%, #ffff66 100%);
 }
