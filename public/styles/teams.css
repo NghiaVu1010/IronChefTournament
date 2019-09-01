@@ -1,36 +1,45 @@
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../images/teams_bg.jpg");
+}
+
 tr, td {
     text-align: center;
 }
 
-.shadows {
-    font-weight: bold;
-    font-family: "arial black", helvetica, arial, sans-serif;
-    
-    text-shadow: 3px 3px 8px rgba(255,255,255,0.45);
-}
-
-.data-point {
-    font-size: 4rem;
-    font-weight: bold;
-    font-family: "arial black", helvetica, arial, sans-serif;
-    
-    text-shadow: 3px 3px 8px rgba(255,255,255,0.45);
-    background-color: #2e6b83;
-}
-
-.data-text {
-    font-size: 2rem;
-    font-weight: bold;
-    font-family: "arial black", helvetica, arial, sans-serif;
-
-    text-shadow: 3px 3px 8px rgba(255,255,255,0.45);
-    border-top: 3px solid white;
-}
-
-.space-top {
-    padding-top: 20px;
-}
-
 #divisionDDL {
-    width: 300px;
+    width: 250px;
+}
+
+/* Shadows and button size */
+#addTeamBtn {
+    font-size: 2em;
+    padding: 20px 30px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+#addTeamBtn:hover {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/* Animation for 'Create a Team' button */
+#addTeamBtn span {
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+#addTeamBtn span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+#addTeamBtn:hover span {
+    padding-right: 25px;
+}
+#addTeamBtn:hover span:after {
+    opacity: 1;
+    right: 0;
 }
