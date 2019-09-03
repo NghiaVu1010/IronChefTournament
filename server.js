@@ -1,6 +1,7 @@
 let express = require("express");
 let bodyParser = require("body-parser");
 let fs = require("fs");
+const formidable = require('formidable');
 
 let app = express();
 
@@ -465,6 +466,26 @@ app.put("/api/teams", urlencodedParser, function (req, res) {
         Gender: req.body.gender,
         Phone: req.body.phone
     };
+
+    // only process the new image if everything
+    // else is okay
+
+    var form = new formidable.IncomingForm();
+    
+    form.parse(req);
+
+    console.log(form);
+
+    form.on('fileBegin', function (name, file){
+        file.path = __dirname + '/images/teams/' + file.name;
+        team.TeamImage = 'images/teams/' + file.name
+    });
+
+    form.on('file', function (name, file){
+        console.log('Uploaded ' + file.name + '!');
+    });
+
+    //------------------------------------TEST
 
     //console.log("Performing member validation...")
     if (! isValidMember(member))
