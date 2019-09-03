@@ -64,7 +64,7 @@ function validateTeamForm() {
 }
 
 /*
-* Validation for team members, returns errors
+* Validation for team members, returns errors if any
 *
 * @param errMsg (Array) - Array containing all errors found
 * @param allInput (Object) - Grabs input from all text fields to be validated

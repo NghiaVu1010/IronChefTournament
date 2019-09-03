@@ -507,6 +507,7 @@ $(function() {
     // Link to add a new team member
     $("#addMemberBtn").on("click", function() {
         location.href = "add_member.html?teamId=" + teamId;
+        sessionStorage.setItem("league", objs.League);
     });
 
     // Cancel back to teams
