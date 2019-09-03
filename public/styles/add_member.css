@@ -2,17 +2,7 @@
     padding-top: 70px;
 }
 
-.data-point {
-    font-size: 3rem;
-    font-weight: bold;
-    font-family: "arial black", helvetica, arial, sans-serif;
-    letter-spacing: -5px;
-    
-    text-shadow: 3px 3px 8px rgba(255,255,255,0.45);
-}
-
 #ageField {
-    /* -webkit-appearance: menulist-button; */
     line-height: 20px;
     width: 70px;
     overflow: auto;
@@ -22,3 +12,20 @@
     color: red;
     font-weight: bold;
 }
+
+@media only screen and (min-width: 770px) {
+    body {
+        background-image: url("../images/member_bg.jpg");
+        background-repeat: no-repeat;
+        background-size: 50% 100vh;
+        background-position: right top;
+    }
+} 
+
+@media only screen and (max-width: 770px) {
+    body {
+        background-image: url("../images/member_bg.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+} 
