@@ -1,16 +1,5 @@
-fieldset { 
-    display: block;
-    margin-left: 2px;
-    margin-right: 2px;
-    padding-top: 0.35em;
-    padding-bottom: 0.625em;
-    padding-left: 0.75em;
-    padding-right: 0.75em;
-    border: 4px inset;
-}
-
-legend {
-    width: 40%;
+.space-top {
+    padding-top: 70px;
 }
 
 #idError {
@@ -20,4 +9,23 @@ legend {
 #errorMessages {
     color: red;
     font-weight: bold;
+}
+
+@media only screen and (min-width: 770px) {
+    body {
+        background-image: url("../images/team_bg.jpg");
+        background-repeat: no-repeat;
+        background-size: 50% 100vh;
+        background-position: right top;
+        background-attachment: fixed;
+    }
+}
+
+@media only screen and (max-width: 770px) {
+    body {
+        background-image: url("../images/team_bg.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
 }

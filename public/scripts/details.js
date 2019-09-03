@@ -283,18 +283,18 @@ function createEditTeamModal(list) {
 * @param ageOption (Object) - Option element to be appended
 * @param teamSize (Object) - Option element to be appended
 */
-function prefillTeamModal(list) {
-    for(let i = 13; i <= 100; i++) {
+function prefillTeamModal(list, req) {
+    for(let i = req.MinAge; i <= req.MaxAge; i++) {
         let ageOption = $("<option>", {text: i, value: i});
         $("#minAgeField").append(ageOption);
     };
 
-    for(let i = 13; i <= 100; i++) {
+    for(let i = req.MinAge; i <= req.MaxAge; i++) {
         let ageOption = $("<option>", {text: i, value: i});
         $("#maxAgeField").append(ageOption);
     };
 
-    for(let i = 2; i <= 8; i++) {
+    for(let i = 2; i <= req.MaxSize; i++) {
         let teamSize = $("<option>", {text: i, value: i});
         $("#maxTeamField").append(teamSize);
     };
@@ -362,8 +362,8 @@ function createEditMemberModal(list) {
 *
 * @param ageOption (Object) - Option element to be appended
 */
-function prefillMemberModal(list) {
-    for(let i = 13; i <= 100; i++) {
+function prefillMemberModal(list, req) {
+    for(let i = req.MinAge; i <= req.MaxAge; i++) {
         let ageOption = $("<option>", {text: i, value: i});
         $("#ageField").append(ageOption);
     };
@@ -465,10 +465,18 @@ $(function() {
 
     // Holds a string of the action to be done with modal
     let action;
-
     $.getJSON("/api/teams/" + teamId, (data) => {
         objs = data;
-        showData(objs)
+        showData(objs);
+
+        let info;
+        $.getJSON("/api/leagues", (data) => {
+            for(let i = 0; i < data.length; i++) {
+                if(objs.League == data[i].Code) {
+                    info = {MinAge: data[i].MinAge, MaxAge: data[i].MaxAge, MaxSize: data[i].MaxSize};
+                }
+            }
+        });
 
         // Wire in a on click event button to create a modal to edit/remove each team member
         for(let i = 0; i < objs.Members.length; i++) {
@@ -488,7 +496,7 @@ $(function() {
                 currMemberId = objs.Members[i].MemberId;
                 action = "edit";
 
-                prefillMemberModal(objs.Members[i]);
+                prefillMemberModal(objs.Members[i], info);
 
                 $("#editMemberTitle").text("Edit");
                 $("#deleteMsg").empty();
@@ -499,7 +507,7 @@ $(function() {
 
         // Wire in a on click for the edit team
         $("#editTeam" + teamId).on("click", function() {
-            prefillTeamModal(objs);
+            prefillTeamModal(objs, info);
             $("#editTeamModal").modal(focus);
         });
     });

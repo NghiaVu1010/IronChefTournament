@@ -12,16 +12,22 @@ function addTeam() {
         location.href = "details.html?teamId=" + data.TeamId;
     })
     .done(function() {
-        alert("Added successfully!");
+        //alert("Added successfully!");
     })
     .fail(function() {
-        alert("There was a problem, please try again.");
+        //alert("There was a problem, please try again.");
     });
 
     return false;
 }
 
-//complex-generic validation form
+/*
+* Validation for team creation, returns errors if any
+*
+* @param errMsg (Array) - Array containing all errors found
+* @param allInput (Object) - Grabs input from all text fields to be validated
+* @param regExp (RegExp) - Regular expression for emails
+*/
 function validateForm() {
     let errMsg = [];
     let allInput = $("input[type='text']");
@@ -30,8 +36,6 @@ function validateForm() {
     for(let i = 0; i < allInput.length; i++){
         if($("#" + allInput[i].id).val().trim() == "") {
             errMsg[errMsg.length] = allInput[i].name + " is required";
-
-            
         }
         else if(allInput[i].name == "manageremail") {
             if(regExp.test($("#managerEmailField").val()) == false) {
@@ -41,7 +45,7 @@ function validateForm() {
     }
 
     if($("#divisionDDL").val() == "") {
-        errMsg[errMsg.length] = "category is required";
+        errMsg[errMsg.length] = "Division is required";
     }
 
     if($("#minAgeField").val() == "") {
@@ -85,49 +89,60 @@ function buildList(dropdown, list) {
 }
 
 $(function() {
-    //dynamically build DDL with categories
+    // Dynamically build DDL with divisions
     let divisionData;
     $.getJSON("/api/leagues", (data) => {
         divisionData = data;
         buildList($("#divisionDDL"), divisionData);
     });
 
-    for(let i = 13; i <= 100; i++) {
-        let ageOption = $("<option>", {text: i, value: i});
-        $("#minAgeField").append(ageOption);
-    };
+    let currDivision;
+    $("#divisionDDL").on("change", () => {
+        for(let i = 0; i < divisionData.length; i++) {
+            if($("#divisionDDL").val() == divisionData[i].Code) {
+                currDivision = divisionData[i];
+            }
+        };
 
-    for(let i = 13; i <= 100; i++) {
-        let ageOption = $("<option>", {text: i, value: i});
-        $("#maxAgeField").append(ageOption);
-    };
+        // Empty and populate based on Min Age restriction
+        $("#minAgeField").empty();
+        for(let i = currDivision.MinAge; i <= currDivision.MaxAge; i++) {
+            let ageOption = $("<option>", {text: i, value: i});
+            $("#minAgeField").append(ageOption);
+        }
 
-    for(let i = 2; i <= 8; i++) {
-        let teamSize = $("<option>", {text: i, value: i});
-        $("#maxTeamField").append(teamSize);
-    };
+        // Empty and populate based on Max Age restriction
+        $("#maxAgeField").empty();
+        for(let j = currDivision.MinAge; j <= currDivision.MaxAge; j++) {
+            let ageOption = $("<option>", {text: j, value: j});
+            $("#maxAgeField").append(ageOption);
+        }
 
+        // Empty and populate based on team size restriction
+        $("#maxTeamField").empty();
+        for(let k = 2; k <= currDivision.MaxSize; k++) {
+            let ageOption = $("<option>", {text: k, value: k});
+            $("#maxTeamField").append(ageOption);
+        };
+    });
+
+
+    // Add focus/blur effect on text
     $("input[type='text']").on("focus", function() {
         $(this).css({'background-color' : '#4ac3f3'});
     });
-
     $("input[type='text']").on("blur", function() {
         $(this).css({'background-color' : ''});
     });
 
+    // Adds team and brings to details
     $("#addTeamBtn").on("click", function() {
         let isValid = validateForm();
-
         if(isValid == false) return;
-        
-        //console.log("adding team");
-        
         addTeam();
-        
-        //location.href = "teams.html";
     });
 
-    //cancel back to details
+    // Cancel back to details
     $("#cancelBtn").on("click", function() {
         location.href = "teams.html";
     });
