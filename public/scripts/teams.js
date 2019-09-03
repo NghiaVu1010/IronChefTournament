@@ -206,11 +206,13 @@ $(function() {
     });
 
     // Bind Click Event Handler to Reset Buttom
-    $("#resetBtn").on("click", function() {
+
+    $("#searchForm").on("reset", function(e) {
+        e.preventDefault();
         $("#teamBody").empty();
         $("#teamTable").hide();
         $("#emptyDiv").empty();
         $("#divisionDetails").empty();
-        //$("#defaultChoose:selected"); 
+        $("#divisionDDL").val("0");
     });
 });

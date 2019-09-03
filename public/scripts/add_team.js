@@ -55,12 +55,8 @@ function validateForm() {
         errMsg[errMsg.length] = "Division is required";
     }
 
-    if($("#minAgeField").val() == "") {
-        errMsg[errMsg.length] = "Please select min age";
-    }
-
-    if($("#maxAgeField").val() == "") {
-        errMsg[errMsg.length] = "Please select max age";
+    if($("#minAgeField").val() > $("#maxAgeField").val()) {
+        errMsg[errMsg.length] = "Please select a valid age range";
     }
 
     if($("#maxTeamField").val() == "") {
