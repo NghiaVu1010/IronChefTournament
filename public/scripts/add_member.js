@@ -7,15 +7,54 @@
 
 // Send the data to server
 function addMember(teamId) {
-    $.post(`/api/teams/${teamId}/members`, $("#memberForm").serialize(), function(data) {})
+    
+    var formData = new FormData($('#memberForm')[0]);
+    console.log(formData);
+
+    //----- This prints out the form object
+    // formdata.append('file', $('input[type=file]')[0].files[0]);
+
+    // console.log(formdata);
+
+    // let file;
+    // if (($("#profilepic"))[0].files.length > 0) {
+    //     file = ($("#profilepic"))[0].files[0];
+    // } else {
+    //     // no file chosen!
+    // }
+    // console.log(file);
+    //-----
+
+    // console.log($("#memberForm").serialize());
+
+    // console.log(formdata);
+
+    // $.post(`/api/teams/${teamId}/members`, $("#memberForm").serialize(), function(data) {})
+    //     .done(function() {
+    //         alert("Registered successfully!");
+    //         //location.href = "details.html?teamId=" + teamId;
+    //     })
+    //     .fail(function() {
+    //         //alert("There was a problem, please try again.");
+    //         $("<li>Please check that you meet the requirements!</li>").appendTo($("#errorMessages"));
+    //     });
+
+    $.ajax({
+        type: "POST",
+        url: `/api/teams`,
+        data: formData,
+        processData: false,
+        contentType: false
+        })
         .done(function() {
-            //alert("Registered successfully!");
-            location.href = "details.html?teamId=" + teamId;
+            alert("Edit team successful!");
+            //location.reload();
         })
         .fail(function() {
             //alert("There was a problem, please try again.");
-            $("<li>Please check that you meet the requirements!</li>").appendTo($("#errorMessages"));
+            $("<li>Please see if the requirements conflict with an existing team member!</li>").appendTo($("#errorTeamMessages"));
         });
+
     return false;
 }
 

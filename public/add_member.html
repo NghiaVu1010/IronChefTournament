@@ -38,7 +38,7 @@
       <div class="container">
         <h1 class="white obli space-top bronze shadows">Prepare a new <br>Challenger!</h1>
         <!-- Registration Form -->
-        <form class="row white" id="memberForm">
+        <form enctype="multipart/form-data" class="row white" id="memberForm">
           <div class="col-md-6">
             <div class="form-group">
               <label for="nameField">Name</label>
@@ -74,6 +74,14 @@
             <div class="form-check">
               <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="Female">
               <label class="form-check-label" for="femaleGender">Female</label>
+            </div>
+
+            <!-- TRYING TO UPLOAD AN IMAGE -->
+            <div class="form-group">
+
+              <p>Upload a Profile Picture...</p>
+              <input type="file" name="profilepic" id="profilepic" value="">
+              
             </div>
 
             <div id="msgDiv"> 
