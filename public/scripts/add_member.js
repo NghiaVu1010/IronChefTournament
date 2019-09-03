@@ -51,7 +51,7 @@ function addMember(teamId) {
 
     $.ajax({
         type: "POST",
-        url: `/api/teams`,
+        url: `/api/teams/${teamId}/members`,
         data: formData,
         processData: false,
         contentType: false
