@@ -10,11 +10,11 @@ function addMember(teamId) {
     $.post(`/api/teams/${teamId}/members`, $("#memberForm").serialize(), function(data) {})
         .done(function() {
             //alert("Registered successfully!");
-            sessionStorage.setItem("status", "good");
+            location.href = "details.html?teamId=" + teamId;
         })
         .fail(function() {
             //alert("There was a problem, please try again.");
-            sessionStorage.setItem("status", "bad");
+            $("<li>Please check that you meet the requirements!</li>").appendTo($("#errorMessages"));
         });
     return false;
 }
@@ -30,6 +30,7 @@ function validateForm() {
     let errMsg = [];
     let allInput = $("input[type='text']");
     let regExp = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    let regExpPhone = /^\d{3}-\d{3}-\d{4}$/;
 
     for(let i = 0; i < allInput.length; i++){
         if($("#" + allInput[i].id).val().trim() == "") {
@@ -39,6 +40,10 @@ function validateForm() {
 
     if(regExp.test($("#emailField").val()) == false) {
         errMsg[errMsg.length] = "Please enter a valid email";
+    }
+
+    if(regExpPhone.test($("#phoneField").val()) == false) {
+        errMsg[errMsg.length] = "Please enter a valid phone # (format: 860-555-5555)";
     }
 
     if($("#ageField").val() == "") {
@@ -109,11 +114,5 @@ $(function() {
         let isValid = validateForm();
         if(isValid == false) return;
         addMember(teamId);
-        let currStatus = sessionStorage.getItem("status");
-
-        if(currStatus == "good")
-          location.href = "details.html?teamId=" + teamId;
-        else
-            $("<li>Please check that you meet the requirements!</li>").appendTo($("#errorMessages"));
     });
 });

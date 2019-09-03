@@ -128,23 +128,18 @@ function deleteTeam(teamId) {
         url: `/api/teams/${teamId}`
         })
         .done(function() {
-            alert("Deleted successfully!");
             location.reload();
         })
         .fail(function() {
-            alert("There was a problem, please try again.");
         });
 
     return false;
 }
 
 $(function() {
-
     // Call to get all divisions and dynamically build DDL
     let divisionData;
     let divisionPicked = sessionStorage.getItem("divisionPick");
-    //sessionStorage.removeItem("divisionPick");
-    //console.log(divisionPicked);
 
     $.getJSON("/api/leagues", (data) => {
         divisionData = data;

@@ -13,9 +13,7 @@ function stick_top_nav(){
 
 $(function() {
     //stick_top_nav();
-
     
-
     // Creates a reference based on what button is clicked
     $("#navSearch").on("click", function() {
         sessionStorage.setItem("divisionPick", "none");

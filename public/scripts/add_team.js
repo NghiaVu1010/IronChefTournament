@@ -5,7 +5,7 @@
 */
 "use strict";
 
-//send the data to server
+// Send the data to server
 function addTeam() {
     $.post("/api/teams", $("#teamForm").serialize(), function(data) {
         data = JSON.parse(data);
@@ -16,6 +16,7 @@ function addTeam() {
     })
     .fail(function() {
         //alert("There was a problem, please try again.");
+        $("<li>Please check that you meet the requirements!</li>").appendTo($("#errorMessages"));
     });
 
     return false;
@@ -32,6 +33,7 @@ function validateForm() {
     let errMsg = [];
     let allInput = $("input[type='text']");
     let regExp = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    let regExpPhone = /^\d{3}-\d{3}-\d{4}$/;
 
     for(let i = 0; i < allInput.length; i++){
         if($("#" + allInput[i].id).val().trim() == "") {
@@ -40,6 +42,11 @@ function validateForm() {
         else if(allInput[i].name == "manageremail") {
             if(regExp.test($("#managerEmailField").val()) == false) {
                 errMsg[errMsg.length] = "Please enter a valid email";
+            }
+        }
+        else if(allInput[i].name == "managerphone") {
+            if(regExpPhone.test($("#managerPhoneField").val()) == false) {
+                errMsg[errMsg.length] = "Please enter a valid phone # (format: 860-555-5555)";
             }
         }
     }
