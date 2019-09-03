@@ -190,5 +190,7 @@ $(function() {
     $("#resetBtn").on("click", function() {
         $("#teamBody").empty();
         $("#teamTable").hide();
+        $("#emptyDiv").empty();
+        $("#divisionDetails").empty();
     });
 });

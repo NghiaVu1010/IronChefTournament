@@ -18,8 +18,8 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
-      <a class="navbar-brand obli" href="#">Iron Chef</a>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+      <a class="navbar-brand obli bronze shadows" href="#">Iron Chef</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop" aria-controls="navbarTop" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -28,28 +28,25 @@
       <div class="collapse navbar-collapse" id="navbarTop">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link bold" href="#">Team Detail</a>
+            <a class="nav-link bold bronze shadows" href="teams.html">Teams</a>
           </li>
         </ul>
       </div>
     </nav>
 
     <main>
-      <h1 class="white obli space-top data-point">Register Team</h1>
-
       <div class="container">
+        <h1 class="white obli space-top bronze shadows">Here comes a new<br>Challenger!</h1>
         <!-- Registration Form -->
         <form class="row white" id="teamForm">
-          <div class="col-md-5">
-
-
+          <div class="col-md-6">
             <div class="form-group">
               <label for="teamNameField">Team Name</label>
               <input type="text" class="form-control" id="teamNameField" name="teamname"/>
             </div>
 
             <div>
-              <label for="divisionDDL" class="white">Category: </label>
+              <label for="divisionDDL" class="white">Divison: </label>
               <select class="custom-select" id="divisionDDL" name="leaguecode" required>
                 <option selected value="">Choose...</option>
               </select>
@@ -70,25 +67,27 @@
               <input type="text" class="form-control" id="managerPhoneField" name="managerphone" required/>
             </div>
     
-            <div class="form-group">
-              <label for="minAgeField">Min Age: </label>
-              <select class="form-control" id="minAgeField" name="minmemberage" required>
-                <option value="" selected>...</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="maxAgeField">Max Age: </label>
-              <select class="form-control" id="maxAgeField" name="maxmemberage" required>
-                <option value="" selected>...</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="maxTeamField">Max Team Size: </label>
-              <select class="form-control" id="maxTeamField" name="maxteammembers" required>
-                <option value="" selected>...</option>
-              </select>
+            <div class="row">
+              <div class="form-group col-md-3">
+                <label for="minAgeField">Min Age: </label>
+                <select class="form-control" id="minAgeField" name="minmemberage" required>
+                  <option value="" selected>...</option>
+                </select>
+              </div>
+  
+              <div class="form-group col-md-3">
+                <label for="maxAgeField">Max Age: </label>
+                <select class="form-control" id="maxAgeField" name="maxmemberage" required>
+                  <option value="" selected>...</option>
+                </select>
+              </div>
+  
+              <div class="form-group col-md-3">
+                <label for="maxTeamField">Team Size: </label>
+                <select class="form-control" id="maxTeamField" name="maxteammembers" required>
+                  <option value="" selected>...</option>
+                </select>
+              </div>
             </div>
   
             <div class="form-check">
@@ -103,25 +102,34 @@
               <input class="form-check-input" type="radio" name="teamgender" id="anyGender" value="Any">
               <label class="form-check-label" for="anyGender">Any</label>
             </div>
-          </div>
 
-
-          <!-- <div class="w-100"></div> -->
-          <div id="msgDiv"> 
-            <ul id="errorMessages"></ul> 
+            <div id="msgDiv"> 
+              <ul id="errorMessages"></ul> 
+            </div>
           </div>
         </form>
 
-        <input type="button" class="col-md-4 btn btn-primary bold" id="addTeamBtn" value="Add Team" />
-        <input type="button" class="col-md-4 btn btn-secondary bold" id="cancelBtn" value="Cancel" />
-
+        <div class="row">
+          <input type="button" class="col-md-3 btn btn-success bold" id="addTeamBtn" value="Add Team" />
+          <input type="button" class="col-md-3 btn btn-secondary bold" id="cancelBtn" value="Cancel" />
+        </div>
       </div>
     </main>
 
-    <footer class="container white">
-      <hr class="bg-white">
-      <p>&copy;Hartcode Academy 2019</p>
-    </footer>  
+    <footer class="container white text-center">
+        <div class="row">
+          <div class="col-md-6">
+            <hr class="bg-white">
+            <p>
+              <i class="fab fa-twitter-square"></i>
+              <i class="fab fa-facebook-square"></i>
+              <i class="fab fa-youtube-square"></i>
+              <i class="fab fa-instagram"></i>
+            </p>
+            <p>&copy;Hartcode Academy 2019</p>
+          </div>
+        </div>
+      </footer>   
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

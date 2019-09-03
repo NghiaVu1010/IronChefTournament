@@ -31,7 +31,7 @@ function validateTeamForm() {
     }
 
     if($("#divisionDDL").val() == "") {
-        errMsg[errMsg.length] = "category is required";
+        errMsg[errMsg.length] = "Division is required";
     }
 
     if($("#minAgeField").val() == "") {
