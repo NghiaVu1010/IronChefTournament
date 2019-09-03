@@ -1,42 +1,8 @@
-blockquote {
-    font-family: Georgia, serif;
-    font-size: 18px;
-    font-style: italic;
-    width: 500px;
-    margin: 0.25em 0;
-    padding: 0.35em 40px;
-    line-height: 1.45;
-    position: relative;
-    color: #383838;
-}
-
-blockquote:before {
-    display: block;
-    padding-left: 10px;
-    content: "\201C";
-    font-size: 80px;
-    position: absolute;
-    left: -20px;
-    top: -20px;
-    color: #0683b4;
-}
-
-blockquote:after {
-    display: block;
-    padding-left: 10px;
-    content: "\201D";
-    font-size: 80px;
-    position: absolute;
-    right: 50px;
-    top: 160px;
-    color: #0683b4;
-}
-
 body {
-    background-color: #3c4f57;
+    background: linear-gradient(to left, #800000 0%, #000000 100%);
 }
 
-.parallax { 
+.parallaxHeader { 
     /* Full height */
     height: 100vh; 
   
@@ -51,9 +17,20 @@ body {
     background-image: url("../images/IronChef.jpg");
 }
 
-/* .featurette {
+.parallaxBody {
+    /* Full height */
     height: 400px; 
-} */
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.paraImg2 {
+    background-image: url("../images/IronChefBattle.jpeg");
+}
 
 @media only screen and (max-width: 800px) {
     .parallax {

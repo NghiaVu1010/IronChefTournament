@@ -28,7 +28,8 @@ function showData(list) {
     // Create card for members
     if(list.Members.length == 0) {
         $("#team-members").append($("<p>")
-            .text("There are currently no team members registered!"));
+            .text("There are currently no team members registered!")
+            .prop("class", "white"));
     }
     else {
         for(let i = 0; i < list.Members.length; i++) {
@@ -394,17 +395,19 @@ function createRemoveMemberModal(list) {
 function editTeam(teamId) {
     let serial = `teamid=${teamId}&` + $("#editTeamForm").serialize();
 
+    
     $.ajax({
         type: "PUT",
         url: `/api/teams`,
         data: serial
         })
         .done(function() {
-            alert("Edit team successful!");
+            //alert("Edit team successful!");
             location.reload();
         })
         .fail(function() {
-            alert("There was a problem, please try again.");
+            //alert("There was a problem, please try again.");
+            $("<li>Please see if the requirements conflict with an existing team member!</li>").appendTo($("#errorTeamMessages"));
         });
 
     return false;
@@ -424,11 +427,12 @@ function editMember(teamId, memberId) {
         data: serial
         })
         .done(function() {
-            alert("Edit successfully!");
+            //alert("Edit successfully!");
             location.reload();
         })
         .fail(function() {
-            alert("There was a problem, please try again.");
+            //alert("There was a problem, please try again.");
+            $("<li>Please check that you meet the requirements!</li>").appendTo($("#errorMemberMessages"));
         });
 
     return false;
@@ -443,11 +447,11 @@ function removeMember(teamId, memberId) {
         url: `/api/teams/${teamId}/members/${memberId}`
         })
         .done(function() {
-            alert("Deleted successfully!");
+            //alert("Deleted successfully!");
             location.reload();
         })
         .fail(function() {
-            alert("There was a problem, please try again.");
+            //alert("There was a problem, please try again.");
         });
 
     return false;

@@ -16,6 +16,7 @@ function validateTeamForm() {
     let errMsg = [];
     let allInput = $("#editTeamForm input[type='text']");
     let regExp = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    let regExpPhone = /^\d{3}-\d{3}-\d{4}$/;
 
     for(let i = 0; i < allInput.length; i++){
         // Checks to see if any field is empty
@@ -26,6 +27,11 @@ function validateTeamForm() {
         else if(allInput[i].name == "manageremail") {
             if(regExp.test($("#managerEmailField").val()) == false) {
                 errMsg[errMsg.length] = "Please enter a valid email";
+            }
+        }
+        else if(allInput[i].name == "managerphone") {
+            if(regExpPhone.test($("#managerPhoneField").val()) == false) {
+                errMsg[errMsg.length] = "Please enter a valid phone # (format: 860-555-5555)";
             }
         }
     }
@@ -74,6 +80,7 @@ function validateEditMemberForm() {
     let errMsg = [];
     let allInput = $("#editMemberForm input[type='text']");
     let regExp = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    let regExpPhone = /^\d{3}-\d{3}-\d{4}$/;
 
     for(let i = 0; i < allInput.length; i++){
         // Checks to see if any field is empty
@@ -84,6 +91,10 @@ function validateEditMemberForm() {
 
     if(regExp.test($("#emailField").val()) == false) {
         errMsg[errMsg.length] = "Please enter a valid email";
+    }
+
+    if(regExpPhone.test($("#phoneField").val()) == false) {
+        errMsg[errMsg.length] = "Please enter a valid phone # (format: 860-555-5555)";
     }
 
     if($("#ageField").val() == "") {

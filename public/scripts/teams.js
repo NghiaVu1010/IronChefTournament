@@ -107,9 +107,17 @@ function createDeleteModal(list) {
 * @param element (Object) - Create an option element to build drop down
 */
 function buildList(dropdown, list) {
+    let divisionPicked = sessionStorage.getItem("divisionPick");
+
     for(let i = 0; i < list.length; i++) {
-        let element = $("<option>", {text: list[i].Name, value: list[i].Code});
-        dropdown.append(element);
+        if(divisionPicked == list[i].Code) {
+            let element = $("<option>", {text: list[i].Name, value: list[i].Code, selected: "selected"});
+            dropdown.append(element);
+        }
+        else {
+            let element = $("<option>", {text: list[i].Name, value: list[i].Code});
+            dropdown.append(element);
+        }
     }
 }
 
@@ -134,9 +142,25 @@ $(function() {
 
     // Call to get all divisions and dynamically build DDL
     let divisionData;
+    let divisionPicked = sessionStorage.getItem("divisionPick");
+    //sessionStorage.removeItem("divisionPick");
+    //console.log(divisionPicked);
+
     $.getJSON("/api/leagues", (data) => {
         divisionData = data;
         buildList($("#divisionDDL"), divisionData);
+
+        if(divisionPicked != "none") {
+            $.getJSON("/api/teams/byleague/" + $("#divisionDDL").val(), (data) => {
+                displayData(data);
+                $("#teamTable").show();
+            });
+
+            for(let i = 0; i < divisionData.length; i++) {
+                if($("#divisionDDL").val() == divisionData[i].Code)
+                    $("#divisionDetails").text(divisionData[i].Description);
+            }
+        }
     });
     
     // Populate table based on selection
@@ -192,5 +216,6 @@ $(function() {
         $("#teamTable").hide();
         $("#emptyDiv").empty();
         $("#divisionDetails").empty();
+        //$("#defaultChoose:selected"); 
     });
 });

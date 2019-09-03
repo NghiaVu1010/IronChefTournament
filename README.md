@@ -4,8 +4,11 @@
   Iron Chef is a cooking competition that pits you in a gauntlet against other rival teams. Sign up and compete to see who will be crowned the next King of Iron Chef!
   
 ## Technologies
- * Bootstrap4
+ * HTML / CSS3/ Bootstrap4
  * JavaScript
+ * jQuery
+ * AJAX
+ * REST API
  * Node.js
   
 ## Authors

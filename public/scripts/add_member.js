@@ -10,11 +10,11 @@ function addMember(teamId) {
     $.post(`/api/teams/${teamId}/members`, $("#memberForm").serialize(), function(data) {})
         .done(function() {
             //alert("Registered successfully!");
-            sessionStorage.setItem("status", good);
+            sessionStorage.setItem("status", "good");
         })
         .fail(function() {
             //alert("There was a problem, please try again.");
-            sessionStorage.setItem("status", bad);
+            sessionStorage.setItem("status", "bad");
         });
     return false;
 }
@@ -78,16 +78,19 @@ $(function() {
     // Call to get current division info
     let divisionData;
     $.getJSON("/api/leagues", (data) => {
+        
         for(let i = 0; i < data.length; i++) {
+            
             if(currLeague == data[i].Code) {
                 divisionData = data[i];
+
+                // Dynamically generate age selection
+                for(let j = divisionData.MinAge; j <= divisionData.MaxAge; j++) {
+                    let ageOption = $("<option>", {text: j, value: j});
+                    $("#ageField").append(ageOption);
+                };
             }
 
-            // Dynamically generate age selection
-            for(let j = divisionData.MinAge; j <= 100; j++) {
-                let ageOption = $("<option>", {text: j, value: j});
-                $("#ageField").append(ageOption);
-            };
         };
     });
 
