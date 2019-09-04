@@ -5,15 +5,7 @@
 */
 "use strict";
 
-// WIP
-function stick_top_nav(){
-	if(window.pageYOffset > 36) $("#menu_bar").addClass('stick');
-	else $("#menu_bar").removeClass('stick');
-}
-
 $(function() {
-    //stick_top_nav();
-    
     // Creates a reference based on what button is clicked
     $("#navSearch").on("click", function() {
         sessionStorage.setItem("divisionPick", "none");
