@@ -22,7 +22,6 @@ let app = express();
 // Create application/x-www-form-urlencoded parser
 let urlencodedParser = bodyParser.urlencoded({ extended: false })
 
-var uniqueId;
 // ------ Debugging support ------------------
 
 function logOneTeam(team)
