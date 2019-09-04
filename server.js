@@ -1,13 +1,14 @@
 var multer = require('multer');
 // Create a unique id based on date, until a better way is found
-var uniqueId = Date.now();
+//var uniqueId = Date.now();
 var storage = multer.diskStorage({
    destination: function (req, file, cb) {
      cb(null, 'public/uploads/')
    },
    filename: function (req, file, cb) {
        //uniqueId = Date.now() + file.originalname;
-     cb(null, uniqueId + file.originalname )
+       //better generation modifying getNextId
+     cb(null, `${getNextId("member", true)}_${file.originalname}` )
    }
  });
 var upload = multer({ storage: storage });
@@ -44,7 +45,7 @@ function logArrayOfTeams(arr)
 
 // ------ Get next ID helper ------------------
 
-function getNextId(counterType)  // use 'member' or 'team' as counterType
+function getNextId(counterType, checkFile)  // use 'member' or 'team' as counterType
 {
     // read the counter file
     let data = fs.readFileSync( __dirname + "/data/counters.json", "utf8");
@@ -65,9 +66,11 @@ function getNextId(counterType)  // use 'member' or 'team' as counterType
             break;
     }
 
-    // save the updated counter
-    fs.writeFileSync(__dirname + "/data/counters.json", JSON.stringify(data));
- 
+    // Modified to see if the user included a photo or not
+    if(!checkFile) {
+        // save the updated counter
+        fs.writeFileSync(__dirname + "/data/counters.json", JSON.stringify(data));
+    }
     return id;
 }
 
@@ -472,13 +475,13 @@ app.put("/api/teams", urlencodedParser, function (req, res) {
     //console.log("BODY -------->" + JSON.stringify(req.body));
 
     // MODIFIED SERVER TO ALLOW FOR CARD IMG FOR MEMBERS
-    let memberId = getNextId("member");   // assign new id
+    
     var image;
     // Allow for an image or not
     try {
         if (req.file.filename) {
             // Save image in /public/uploads folder
-            image = `/uploads/${uniqueId}${req.file.originalname}`;
+            image = `/uploads/${getNextId("member", true)}_${req.file.originalname}`;
             console.log(`Image saved as: ${image}`);
         }
     } 
@@ -487,6 +490,8 @@ app.put("/api/teams", urlencodedParser, function (req, res) {
         console.log(e);
         console.log(`Image saved as: ${image}`);
     }
+
+    let memberId = getNextId("member");   // assign new id
 
     // assemble member information so we can validate it
     let member = {

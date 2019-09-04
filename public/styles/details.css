@@ -1,7 +1,8 @@
 body {
-    background-repeat: no-repeat;
-    background-size: cover;
     background-image: url("../images/fire_bg.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100vh;
+    background-attachment: fixed;
 }
 
 .space-top {
