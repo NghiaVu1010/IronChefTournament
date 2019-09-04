@@ -24,6 +24,7 @@ Clone / Fork / Download Repo then run ```npm install```.
 ``` 
 # npm install express --save
 # npm install body-parser --save
+# npm install multer --save
 ```
 
 ### To Start/Stop a Specific Node Process
@@ -41,8 +42,8 @@ Clone / Fork / Download Repo then run ```npm install```.
 
 ## Acknowledgments
 
-* Robert
-* Dana
+* Robert (Big shout out for help regarding image upload)
+* Dana (Great instructor)
 
 ## Reporting issues
 Use [Github's Issues section for this repository](https://github.com/NghiaVu1010/LearningIsFun/issues) to report any issues with the notes.
