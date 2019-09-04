@@ -8,9 +8,6 @@
 // Send the data to server
 function addMember(teamId) {
     
-    // var formData = new FormData($('#memberForm')[0]);
-    // console.log(formData);
-
     //----- This prints out the form object
     // formdata.append('file', $('input[type=file]')[0].files[0]);
 
@@ -39,13 +36,8 @@ function addMember(teamId) {
     //         $("<li>Please check that you meet the requirements!</li>").appendTo($("#errorMessages"));
     //     });
 
-    console.log($('#profilepic')[0]);
-    console.log($('#profilepic')[0].files);
-    console.log($('#profilepic')[0].files[0]);
-    console.log($('#profilepic')[0].files[0].name);
-
     var formData = new FormData();
-    formData.append($('#profilepic')[0].files[0].name, $('#profilepic')[0].files[0]);
+    formData.append("file", $('input[type=file]')[0].files[0]);
 
     alert(JSON.stringify(formData));
 
