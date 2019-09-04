@@ -113,6 +113,7 @@ function createRequirementCard(team) {
 * Create a card for each member
 * 
 * @param card (Object) - Main div holding the card together
+* @param cardImg (Object) - Card img
 * @param cardHead (Object) - Card head member name
 * @param cardBody (Object) - Card body holding interested elements
 * @param cardText1 (Object) - Card text holding age
@@ -126,6 +127,7 @@ function createRequirementCard(team) {
 function createMemberCard(member) {
     // Dynamically create card info
     let card = $("<div>", {class: "card col-md-3"});
+    let cardImg = $("<img>", {src: member.Profile, alt: member.MemberId + "Profile", class: "card-img-top"});
     let cardHead = $("<h5>", {text: member.MemberName, class: "card-header"})
     let cardBody = $("<div>", {class: "card-body"});
     let cardText1 = $("<p>", {text: "Age " + member.Age});
@@ -147,7 +149,8 @@ function createMemberCard(member) {
         html: "<i class='fas fa-times'></i>"});
 
     // Append the body
-    card.append(cardHead)
+    card.append(cardImg)
+        .append(cardHead)
         .append(cardBody);
 
     // Append the buttons

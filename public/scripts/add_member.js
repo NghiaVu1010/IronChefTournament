@@ -5,27 +5,13 @@
 */
 "use strict";
 
-// Send the data to server
-function addMember(teamId) {
-    
-    //----- This prints out the form object
-    // formdata.append('file', $('input[type=file]')[0].files[0]);
-
-    // console.log(formdata);
-
-    // let file;
-    // if (($("#profilepic"))[0].files.length > 0) {
-    //     file = ($("#profilepic"))[0].files[0];
-    // } else {
-    //     // no file chosen!
-    // }
-    // console.log(file);
-    //-----
-
-    // console.log($("#memberForm").serialize());
-
-    // console.log(formdata);
-
+/*
+* Send data to the server with an image
+*
+* @param formData (Object) - Form getting pased
+*/
+function addMember(theForm, teamId) {
+    // ---- ORIGINAL VERSION WITHOUT IMAGE ----
     // $.post(`/api/teams/${teamId}/members`, $("#memberForm").serialize(), function(data) {})
     //     .done(function() {
     //         alert("Registered successfully!");
@@ -36,10 +22,7 @@ function addMember(teamId) {
     //         $("<li>Please check that you meet the requirements!</li>").appendTo($("#errorMessages"));
     //     });
 
-    var formData = new FormData();
-    formData.append("file", $('input[type=file]')[0].files[0]);
-
-    alert(JSON.stringify(formData));
+    var formData = new FormData(theForm);
 
     $.ajax({
         type: "POST",
@@ -49,12 +32,12 @@ function addMember(teamId) {
         contentType: false
         })
         .done(function() {
-            alert("Edit team successful!");
-            //location.reload();
+            //alert("Edit team successful!");
+            location.href = "details.html?teamId=" + teamId;
         })
         .fail(function() {
             //alert("There was a problem, please try again.");
-            $("<li>Please see if the requirements conflict with an existing team member!</li>").appendTo($("#errorTeamMessages"));
+            $("<li>Please see if the requirements conflict with an existing team member!</li>").appendTo($("#errorMessages"));
         });
 
     return false;
@@ -152,8 +135,16 @@ $(function() {
 
     // Send back to details after adding a member
     $("#confirmBtn").on("click", function() {
+        $("#memberForm").submit();
+        // let isValid = validateForm();
+        // if(isValid == false) return;
+        // addMember(teamId);
+    });
+    // Bing event handler to the submit
+    $("#memberForm").on("submit", function(e) {
+        e.preventDefault();
         let isValid = validateForm();
         if(isValid == false) return;
-        addMember(teamId);
-    });
+        addMember(this, teamId);
+    })
 });

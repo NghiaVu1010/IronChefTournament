@@ -1,10 +1,13 @@
 var multer = require('multer');
+// Create a unique id based on date, until a better way is found
+var uniqueId = Date.now();
 var storage = multer.diskStorage({
    destination: function (req, file, cb) {
      cb(null, 'public/uploads/')
    },
    filename: function (req, file, cb) {
-     cb(null, file.originalname )
+       //uniqueId = Date.now() + file.originalname;
+     cb(null, uniqueId + file.originalname )
    }
  });
 var upload = multer({ storage: storage });
@@ -19,6 +22,7 @@ let app = express();
 // Create application/x-www-form-urlencoded parser
 let urlencodedParser = bodyParser.urlencoded({ extended: false })
 
+var uniqueId;
 // ------ Debugging support ------------------
 
 function logOneTeam(team)
@@ -464,55 +468,44 @@ app.put("/api/teams", urlencodedParser, function (req, res) {
  // ADD A MEMBER TO A TEAM urlencodedParser
  app.post("/api/teams/:id/members", upload.single('file'), function (req, res) {
     let teamId = req.params.id;
-    console.log("Received a POST request to add a member to team " + teamId);
-    console.log("BODY -------->" + JSON.stringify(req.body));
+    //console.log("Received a POST request to add a member to team " + teamId);
+    //console.log("BODY -------->" + JSON.stringify(req.body));
 
-    // assemble member information so we can validate it
-    let member = {
-        MemberId: getNextId("member"),   // assign new id
-        Email: req.body.email,
-		MemberName: req.body.membername,
-		ContactName: req.body.contactname,
-		Age: Number(req.body.age),
-        Gender: req.body.gender,
-        Phone: req.body.phone
-    };
-
-    // only process the new image if everything
-    // else is okay
-    // var form = new formidable.IncomingForm();
-    
-    // form.parse(req);
-
-    // console.log(form);
-
-    // form.on('fileBegin', function (name, file){
-    //     file.path = __dirname + '/images/teams/' + file.name;
-    //     team.TeamImage = 'images/teams/' + file.name
-    // });
-
-    // form.on('file', function (name, file){
-    //     console.log('Uploaded ' + file.name + '!');
-    // });
-    //------------------------------------TEST
-
+    // MODIFIED SERVER TO ALLOW FOR CARD IMG FOR MEMBERS
+    let memberId = getNextId("member");   // assign new id
+    var image;
+    // Allow for an image or not
     try {
         if (req.file.filename) {
-          // Save image in /public/uploads folder
-          var image = `/uploads/${req.file.originalname}`;
-          console.log(`Image saved as: ${image}`);
+            // Save image in /public/uploads folder
+            image = `/uploads/${uniqueId}${req.file.originalname}`;
+            console.log(`Image saved as: ${image}`);
         }
     } 
     catch(e) {
-      console.log(e);
+        image = `/uploads/default.png`;
+        console.log(e);
+        console.log(`Image saved as: ${image}`);
     }
+
+    // assemble member information so we can validate it
+    let member = {
+        MemberId: memberId,
+        Email: req.body.email,
+        MemberName: req.body.membername,
+        ContactName: req.body.contactname,
+        Age: Number(req.body.age),
+        Gender: req.body.gender,
+        Phone: req.body.phone,
+        Profile: image
+    };
 
     //console.log("Performing member validation...")
     if (! isValidMember(member))
     {
         //console.log("Invalid  data!")
-		res.status(400).send("Bad Request - Incorrect or Missing Data");
-		return;      
+        res.status(400).send("Bad Request - Incorrect or Missing Data");
+        return;      
     }
     //console.log("Valid data!")
 
@@ -521,9 +514,9 @@ app.put("/api/teams", urlencodedParser, function (req, res) {
 
     let match = getMatchingTeamById(teamId, data)
     if (match == null)
-	{
-		res.status(404).send("Team Not Found");
-		return;
+    {
+        res.status(404).send("Team Not Found");
+        return;
     }
 
     // make sure assignment doesn't violate team rules
@@ -531,22 +524,22 @@ app.put("/api/teams", urlencodedParser, function (req, res) {
     if (member.Age < match.MinMemberAge || member.Age > match.MaxMemberAge)
     {
         res.status(409).send("Member's age is outside of bounds of team age rules");
-		return;       
+        return;       
     }
 
     if (match.TeamGender != "Any" && member.Gender != match.TeamGender)
     {
         res.status(409).send("Member's gender does not conform to team gender rules");
-		return;       
+        return;       
     }
 
     // add the team
     match.Members[match.Members.length] = member;
 
     fs.writeFileSync(__dirname + "/data/teams.json", JSON.stringify(data));
-   
+
     //console.log("New member added: ");
-	//console.log("Name: " + member.MemberName)
+    //console.log("Name: " + member.MemberName)
     res.status(200).send();
  })
 
