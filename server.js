@@ -16,7 +16,6 @@ var upload = multer({ storage: storage });
 let express = require("express");
 let bodyParser = require("body-parser");
 let fs = require("fs");
-const formidable = require('formidable');
 
 let app = express();
 
