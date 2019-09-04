@@ -1,3 +1,14 @@
+var multer = require('multer');
+var storage = multer.diskStorage({
+   destination: function (req, file, cb) {
+     cb(null, 'public/uploads/')
+   },
+   filename: function (req, file, cb) {
+     cb(null, file.originalname )
+   }
+ });
+var upload = multer({ storage: storage });
+
 let express = require("express");
 let bodyParser = require("body-parser");
 let fs = require("fs");
@@ -450,8 +461,8 @@ app.put("/api/teams", urlencodedParser, function (req, res) {
     res.status(200).send();
  })
 
- // ADD A MEMBER TO A TEAM
- app.post("/api/teams/:id/members", urlencodedParser, function (req, res) {
+ // ADD A MEMBER TO A TEAM urlencodedParser
+ app.post("/api/teams/:id/members", upload.single('file'), function (req, res) {
     let teamId = req.params.id;
     console.log("Received a POST request to add a member to team " + teamId);
     console.log("BODY -------->" + JSON.stringify(req.body));
@@ -469,23 +480,32 @@ app.put("/api/teams", urlencodedParser, function (req, res) {
 
     // only process the new image if everything
     // else is okay
-
-    var form = new formidable.IncomingForm();
+    // var form = new formidable.IncomingForm();
     
-    form.parse(req);
+    // form.parse(req);
 
-    console.log(form);
+    // console.log(form);
 
-    form.on('fileBegin', function (name, file){
-        file.path = __dirname + '/images/teams/' + file.name;
-        team.TeamImage = 'images/teams/' + file.name
-    });
+    // form.on('fileBegin', function (name, file){
+    //     file.path = __dirname + '/images/teams/' + file.name;
+    //     team.TeamImage = 'images/teams/' + file.name
+    // });
 
-    form.on('file', function (name, file){
-        console.log('Uploaded ' + file.name + '!');
-    });
-
+    // form.on('file', function (name, file){
+    //     console.log('Uploaded ' + file.name + '!');
+    // });
     //------------------------------------TEST
+
+    try {
+        if (req.file.filename) {
+          // Save image in /public/uploads folder
+          var image = `/uploads/${req.file.originalname}`;
+          console.log(`Image saved as: ${image}`);
+        }
+    } 
+    catch(e) {
+      console.log(e);
+    }
 
     //console.log("Performing member validation...")
     if (! isValidMember(member))
