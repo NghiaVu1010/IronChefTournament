@@ -494,6 +494,7 @@ $(function() {
 
                 createRemoveMemberModal(objs.Members[i]);
 
+                $("#deleteMsg").empty();
                 $("#editMemberForm").hide();
                 $("#editMemberModal").modal(focus);
             });
